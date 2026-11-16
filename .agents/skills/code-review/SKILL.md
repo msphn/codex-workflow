@@ -35,6 +35,11 @@ Clean Code and SOLID principles as diagnostic tools, not a demand for more class
   and unused code after tracing consumers. Consolidate repeated business rules
   with common ownership; keep simple repetition when an abstraction would hide
   meaning or couple independently changing behavior.
+  Check whether introduced mechanisms are necessary for the approved behavior
+  and whether an existing implementation already satisfies it. Approval alone
+  does not establish technical necessity. Report avoidable complexity with its
+  concrete maintenance cost and the simpler alternative; do not flag differences
+  solely because they depart from an existing pattern.
 - **State and lifecycle:** Check mutation order, cleanup, retries, concurrency,
   and partial failure where the flow depends on them. For UI code, trace effect
   setup/cleanup, timers, pending work, changing inputs, and state ownership using

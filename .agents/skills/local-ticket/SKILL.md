@@ -79,7 +79,16 @@ recovery needs to the coordinator rather than changing services themselves.
 
 Present the affected repositories, intended changes, contract decisions,
 implementation order, and validation plan. Identify checks already blocked by
-missing infrastructure or data. Ask for explicit approval and stop before
+missing infrastructure or data.
+
+Identify the closest existing implementation and explain whether the proposal
+follows it. Explicitly distinguish ticket requirements from optional policy
+changes. For proposed deviations—such as a new dependency, lifecycle listener,
+custom frontend asset, or content restriction—explain why the existing approach
+is insufficient. Present optional additions separately from the minimum
+implementation.
+
+Ask for explicit approval and stop before
 editing application files or starting implementation agents. A ticket request,
 silence, or a status entry is not approval. Record the owner's actual response
 and approved scope; carry that approval forward without asking again.
