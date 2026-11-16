@@ -1,0 +1,6 @@
+# Copy to repositories.local.toml and edit once for your machine.
+# Relative paths resolve from the directory containing this registry.
+# Do not put credentials here. Sandbox access is configured separately.
+[repositories]
+community-hub = "../welearn-community-hub"
+notification-hub = "../notification-hub"

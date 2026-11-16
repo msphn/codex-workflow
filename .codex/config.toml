@@ -1,0 +1,21 @@
+# Install as .codex/config.toml. Project configuration requires project trust.
+sandbox_mode = "workspace-write"
+
+# Route ordinary ticket prompts into the workflow without a special command.
+developer_instructions = """
+For a request to work on a Jira ticket or pasted ticket, read and follow
+.agents/skills/local-ticket/SKILL.md from the orchestrator project root.
+The main session coordinates the workflow. Delegated specialists perform only
+their assigned stage; they must not restart the workflow or delegate recursively.
+For changes to this orchestration setup itself, follow the user's setup request.
+"""
+
+[sandbox_workspace_write]
+# Relative paths resolve from .codex/, so ../.. is the parent workspace.
+# All sibling projects are writable, as requested. No machine-specific path.
+# This adds filesystem write access; it does not grant connector permissions.
+writable_roots = ["../.."]
+
+[agents]
+enabled = true
+
