@@ -6,6 +6,9 @@ description: Coordinate a review with separate code, architecture, and security 
 # Coordinate a review
 
 The main session coordinates; it does not replace the independent reviewers.
+Read the orchestrator root `AGENTS.md` and apply its model/context selection and
+escalation rules. Record requested/effective model and effort, context mode, and
+any substitution with each domain's results; mark unavailable telemetry unknown.
 Read [the shared review method](../../../standards/review-method.md) for evidence,
 verification, and the merged findings format. Use project-local skills and roles.
 

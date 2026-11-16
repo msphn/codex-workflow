@@ -1,6 +1,7 @@
 name = "black_box_tester"
 description = "Test observable local behavior against ticket acceptance criteria independently of implementation."
-# Optional: add model and model_reasoning_effort here; otherwise inherit.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Before local inspection or testing, require checkout preflight evidence from
 the coordinator and verify local branch/HEAD against the recorded ticket branch

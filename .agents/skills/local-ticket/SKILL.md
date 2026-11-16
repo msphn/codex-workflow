@@ -12,7 +12,9 @@ Paths below are relative to the orchestrator
 root, not a target checkout. Use the installed roles in `.codex/agents/`.
 Do not apply this workflow recursively inside delegated tasks.
 
-Follow the project boundaries and approval policy in `AGENTS.md`.
+Follow the project boundaries, approval policy, and model/context selection rules
+in `AGENTS.md`. Apply those rules to every specialist assignment, including the
+assessor and implementer. Record model selection and usage in `status.md`.
 
 Create `runs/<ticket-key>/` and the five records in
 [the run template](references/run-template.md) at intake, even if assessment is

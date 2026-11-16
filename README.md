@@ -94,6 +94,34 @@ decision. Every ticket has a mandatory `status.md` and supporting run notes unde
 `runs/<ticket-id>/`, ignored by Git. Notes identify the orchestrator revision and
 any uncommitted instruction changes as well as the application snapshots.
 
+## Models and usage
+
+The starting defaults are:
+
+| Role | Model | Reasoning effort |
+| --- | --- | --- |
+| Coordinator and planning | `gpt-6-astra` | `medium` |
+| Assessor | `gpt-6-astra` | `medium` |
+| Implementer | `gpt-6.1-sol` | `medium` |
+| Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
+| Black-box tester | `gpt-6.1-sol` | `medium` |
+
+The coordinator default lives in `.codex/config.toml`; each specialist declares
+both settings in its role file. Planning remains the coordinator's responsibility.
+Verify effective settings when starting work: session or managed-policy overrides
+may differ from the files, and editing files does not prove a running agent changed.
+
+[Project policy](AGENTS.md#model-selection-and-context) defines focused fresh
+handoffs and escalation to Astra for difficult or unresolved assignments. Role
+settings take precedence over spawn overrides, so escalation may use a generic
+agent carrying the original role's complete instructions. Luna is reserved for
+bounded support tasks, not a required review or acceptance stage.
+
+Run notes track model selection, available usage, and rework. A cheaper model does
+not necessarily consume fewer tokens. Compare total usage and repeated attempts
+on representative tickets before lowering these defaults further; unavailable
+telemetry stays unknown.
+
 ## Engineering knowledge base
 
 The shared standards are reusable guidance, with generic examples and no
@@ -123,7 +151,7 @@ other stacks do not inherit the PHP backend architecture.
 | [standards/software-design.md](standards/software-design.md) | Shared design and review principles |
 | [standards/backend-php.md](standards/backend-php.md) | PHP backend guidance |
 | [standards/review-method.md](standards/review-method.md) | Common reviewer procedure, evidence, impact severity, and findings format |
-| [.codex/config.toml](.codex/config.toml) | Ticket routing and parent sandbox settings |
+| [.codex/config.toml](.codex/config.toml) | Coordinator model/effort, ticket routing, and parent sandbox settings |
 | [.codex/agents/assessor.toml](.codex/agents/assessor.toml) | Repository assessment and blocking questions |
 | [.codex/agents/implementer.toml](.codex/agents/implementer.toml) | Implementation after approval |
 | [.codex/agents/code_reviewer.toml](.codex/agents/code_reviewer.toml) | Independent correctness and code-quality review |
@@ -142,11 +170,11 @@ other stacks do not inherit the PHP backend architecture.
 
 Add skills at `.agents/skills/<name>/SKILL.md` with YAML `name` and `description`.
 Add roles as `.codex/agents/<name>.toml` with `name`, `description`, and
-`developer_instructions`. Optional `model` and `model_reasoning_effort` fields
-belong in the role file; otherwise they inherit.
+`developer_instructions`. This project sets both `model` and
+`model_reasoning_effort` in every specialist role file to avoid implicit inheritance.
 
 Use `$review` for a coordinated review; its skill owns the three-domain protocol.
-Initial reviewers and the acceptance tester receive fresh context when supported,
+Initial specialists receive fresh context when supported,
 with explicit assignments and disclosed fallbacks. Review domain and impact
 severity are recorded separately.
 

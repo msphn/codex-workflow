@@ -56,4 +56,36 @@ When required local tooling or services are unavailable, diagnose the failure an
 
 Define implementation, review, and testing responsibilities in separate role instructions. Roles inherit session permissions; role instructions alone cannot guarantee read-only access or isolation.
 
+### Model selection and context
+
+Use the coordinator defaults in `.codex/config.toml` and specialist defaults in
+`.codex/agents/<role>.toml`. Set both model and reasoning effort explicitly when
+configuring a role. Before delegation, check the effective tool/role settings;
+record unavailable models or overrides rather than claiming disk settings applied.
+
+Start initial specialist assignments with fresh context (`fork_turns="none"`
+where supported). Supply a focused, self-contained handoff with the required
+instructions, paths, checkout evidence, scope, contracts, and stage inputs. Do not
+omit required evidence to save tokens. Reuse a specialist for related follow-ups
+when its model and context remain appropriate; preserve review/test independence.
+
+Escalate the affected assignment to `gpt-6-astra` with `medium` reasoning for
+difficult concurrency, authorization, billing, or data-loss reasoning, or unresolved
+review disagreements. Use `high` when the remaining problem needs deeper reasoning.
+The coordinator may make this escalation within the approved scope and must record
+the reason. A role file's model/effort takes precedence over spawn overrides. If
+it prevents escalation, use a fresh generic agent with explicit model/effort and
+the original role's full instructions, required skills, and assignment boundaries;
+disclose this substitution. Stop an existing writer before assigning its files to
+a replacement. If the requested model cannot be selected, report the limitation.
+
+Keep Luna out of the six specialist defaults. It may handle bounded support work
+such as file discovery, documentation lookup, or execution of a fully specified
+check; it does not replace a required review or independent acceptance stage.
+
+Record requested and, when exposed, effective model/effort, context mode,
+escalations, usage, and rework in run notes. Mark unavailable telemetry unknown;
+do not estimate savings from model names. Compare total ticket usage and repeated
+attempts across representative tickets before reducing these defaults further.
+
 Use Codex's agent activity view. Every ticket must have `runs/<ticket-id>/status.md` and the supporting records defined by the local-ticket run template, including blocked tickets. Keep status current at stage changes and handoff. These records are mandatory but do not enforce authorization, isolation, or a durable state machine.

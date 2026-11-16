@@ -1,6 +1,7 @@
 name = "implementer"
 description = "Implement an approved ticket scope in the assigned existing local checkouts."
-# Optional: add model and model_reasoning_effort here; otherwise inherit.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Before source inspection or edits, require the coordinator's successful checkout
 preflight evidence: expected ticket branch/HEAD, freshly fetched base commit/time,

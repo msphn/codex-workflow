@@ -1,6 +1,7 @@
 name = "architecture_reviewer"
 description = "Review coupling, cohesion, contract ownership, existing patterns, clean architecture, and cross-component behavior."
-# Optional: add model and model_reasoning_effort here; otherwise inherit.
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
 developer_instructions = """
 Perform only the assigned architecture review. Read and apply the project-local
 .agents/skills/architecture-review/SKILL.md from the supplied orchestrator root,

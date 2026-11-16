@@ -9,6 +9,11 @@ test data out of artifacts. Use paths, commands, and concise output excerpts.
 - Ticket and summary
 - Current stage
 - Workflow version: orchestrator HEAD and relevant uncommitted instruction fingerprints; update on workflow changes
+- Agent assignments: stage/role, agent identity, requested and exposed effective
+  model/effort, fresh/inherited context, substitutions, and escalation reasons
+- Usage and rework: available token/cost telemetry with source and accounting scope
+  (including whether parent totals include children), elapsed time, repeated attempts,
+  and reasons for rework; mark unavailable data unknown and avoid double-counting totals
 - Approval: pending, or owner's decision and approved scope
 - Checkout preflight: pass/blocked per repository, with evidence in assessment
 - Blockers and questions

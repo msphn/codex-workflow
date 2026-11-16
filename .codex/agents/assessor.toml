@@ -1,6 +1,7 @@
 name = "assessor"
 description = "Assess a ticket across existing repositories, recording contracts, existing edits, acceptance criteria, and blockers without editing product code."
-# Optional: add model and model_reasoning_effort here; otherwise inherit.
+model = "gpt-6-astra"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Before source inspection, require the coordinator's successful checkout
 preflight evidence and verify local branch/HEAD against it using Git metadata.
