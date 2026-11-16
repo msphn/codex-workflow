@@ -46,7 +46,8 @@ The coordinator owns the cross-domain result and all specialist assignments.
    baseline, relevant interfaces, ownership/failure map, test evidence, applicable
    instructions/standards, orchestrator root, role instructions, and its skill's
    absolute path. Include current checkout preflight evidence for ticket work.
-   Make assignments self-contained and require explicit reads. Provide raw evidence
+   Use absolute paths and named sections for shared inputs, require explicit reads,
+   and keep the domain task and boundaries in each assignment. Provide raw evidence
    without implementation reasoning or conclusions that favor a particular finding.
    Record the context mode and supplied inputs. Re-review may reuse that domain's
    reviewer with its prior findings and the new snapshot.
@@ -74,8 +75,11 @@ is not a substitute; do not start another process to evade session restrictions.
   send scoped findings to the implementer; otherwise present recommendations.
   Bring material scope changes back to the owner.
 - After edits, mark affected review results stale and have the relevant reviewers
-  re-review the new state. Assess impact across all three domains; retain an older
-  result only with an explicit reason its reviewed assumptions remain valid.
+  re-review the new state. Supply the changed snapshot, delta, affected findings,
+  and any revised contracts; expand inspection to callers and assumptions affected
+  by the delta. Do not restart an unchanged domain's full investigation by default.
+  Assess impact across all three domains; retain an older result only with an
+  explicit reason its reviewed assumptions remain valid.
 - Report the combined findings using the shared format, with per-domain coverage,
   verification limits, and unresolved decisions. The full stage is complete only
   when all required domains have current completed results; unresolved findings

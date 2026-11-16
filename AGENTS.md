@@ -65,9 +65,14 @@ record unavailable models or overrides rather than claiming disk settings applie
 
 Start initial specialist assignments with fresh context (`fork_turns="none"`
 where supported). Supply a focused, self-contained handoff with the required
-instructions, paths, checkout evidence, scope, contracts, and stage inputs. Do not
-omit required evidence to save tokens. Reuse a specialist for related follow-ups
-when its model and context remain appropriate; preserve review/test independence.
+instructions, paths, checkout evidence, scope, contracts, and stage inputs. Required
+inputs may use absolute file paths and named sections instead of copied text;
+require the recipient to read them and report missing or stale evidence. Keep the
+assignment's task, boundaries, and expected result explicit. Do not send unrelated
+run history or implementation reasoning to independent reviewers/testers.
+Reuse a specialist for related follow-ups when its model and context remain
+appropriate; send changed inputs and affected scope, retaining required state
+verification and review/test independence.
 
 Escalate the affected assignment to `gpt-6-astra` with `medium` reasoning for
 difficult concurrency, authorization, billing, or data-loss reasoning, or unresolved

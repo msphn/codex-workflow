@@ -58,21 +58,24 @@ recovery needs to the coordinator rather than changing services themselves.
   Record standards read, repository-specific exceptions, and material conflicts
   in `assessment.md`. Reassess applicability if affected technologies change.
 - Delegate repository assessment to `assessor`, providing ticket details,
-  relevant registry paths, verified checkout evidence, and the required outputs below. The coordinator
-  retains responsibility for questions, proposal, and approval.
-- Read target repository instructions, including applicable parent and nested
-  `AGENTS.md` files. Inspect `git status --short`, staged and unstaged diffs, and
-  relevant untracked files. Record the initial branch/HEAD and existing changes
+  relevant registry paths, verified checkout evidence, and the required outputs
+  below. The assessor owns source investigation; the coordinator owns preflight,
+  effective access checks, questions, proposal, approval, and recording results.
+  Inspect decisive evidence or gaps rather than routinely repeating the assessor's
+  searches and source reads. This does not replace independent review.
+- Require the assessor to read applicable parent and nested repository
+  instructions, inspect `git status --short`, staged/unstaged diffs and relevant
+  untracked files, and return the initial branch/HEAD and existing-change baseline
   so later review can distinguish ticket changes from the owner's prior work.
-  If proposed work overlaps existing edits, ask the owner how to proceed and
-  wait before touching those edits. Preserve staged state and untracked files.
-- Identify dependencies, API/event/schema contracts, acceptance criteria, local
-  services, test data, and build/test commands. For affected application behavior,
-  record the ownership and failure map from `standards/software-design.md`: rule
+  The assessor reports overlaps; the coordinator asks the owner how to proceed
+  and waits before dependent edits. Preserve staged state and untracked files.
+- Require the assessor to identify dependencies, API/event/schema contracts,
+  acceptance criteria, local services, test data, and build/test commands. For
+  affected application behavior, return the ownership and failure map from `standards/software-design.md`: rule
   owner, mutation paths, dependent contracts/representations, and consistency
   requirements on failure. Keep detail proportionate to the change.
-  Check effective session access;
-  configuration on disk does not prove that the current session loaded it.
+  The coordinator checks effective session access; configuration on disk does
+  not prove that the current session loaded it.
 - Ask about material ambiguities and continue independent read-only assessment.
 
 ## 2. Propose and await approval
@@ -156,9 +159,12 @@ checks, and open questions. Leave changes uncommitted for owner iteration.
 
 ## Resume and iterate
 
-On feedback or a resumed ticket, read the run notes and compare the recorded
-orchestrator revision/instruction fingerprints with the current workflow. Record
-material workflow changes and any required revalidation; do not silently count
+On feedback or a resumed ticket, start with `status.md`, then read the linked
+scope, approval, evidence, and outstanding decisions needed for the next stage.
+Read earlier history when it affects those decisions; do not reload every artifact
+by default. Compare recorded orchestrator revision/instruction fingerprints with
+the current workflow. Record material workflow changes and any required
+revalidation; do not silently count
 historical stages as satisfying newly introduced requirements. Existing owner
 approval still carries forward for unchanged application scope.
 Repeat the checkout preflight before inspecting source or editing. Do not switch

@@ -4,6 +4,15 @@ Create these five files under `runs/<ticket-id>/`. Replace prompts with evidence
 mark stages that have not run as **not started**. Keep credentials and personal
 test data out of artifacts. Use paths, commands, and concise output excerpts.
 
+Keep each fact in its owning record: assessment for requirements/baseline, plan
+for approved decisions, review for findings, tests for acceptance evidence.
+Other records may link to it's named section or a shared snapshot instead of
+copying it. A reference must identify the exact evidence/version; it does not
+replace checking current state. Keep `status.md` as the current stage, blockers,
+and next-action index with links to detail. Preserve approval and decision history.
+Update changed sections instead of rewriting the whole run after each tool call.
+Store lengthy raw output in artifacts and summarize results, errors, and paths.
+
 ## status.md
 
 - Ticket and summary
