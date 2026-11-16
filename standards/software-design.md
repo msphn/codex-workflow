@@ -67,6 +67,14 @@ architectural layer.
 
 ## Verification and review
 
+- Keep permanent regression tests focused on expected application behavior,
+  domain rules, and supported contracts. A changed implementation detail alone
+  does not justify a permanent test.
+- Distinguish regression coverage from one-time validation. For one-time data
+  migrations, conversions, or repair scripts, normally use temporary checks and
+  record their results in the run notes. Keep such checks in the permanent suite
+  only when they protect an explicit ongoing requirement, such as supported
+  upgrade compatibility.
 - Test decisions and observable outcomes through the mechanism providing the
   guarantee. Include relevant denied paths, corrections, repeated operations,
   and partial failures. Mocked calls alone do not establish real integration.
