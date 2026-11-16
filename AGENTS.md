@@ -22,7 +22,7 @@ As the setup develops, keep a repository-name-to-local-path registry, a workflow
 
 ## Workflow and Approval Policy
 
-For ticket work, follow `.agents/skills/local-ticket/SKILL.md`, which owns the assessment, proposal, implementation, review, acceptance testing, and handoff procedure. The main session coordinates; specialists perform only their assigned stage.
+For ticket work, follow `.agents/skills/local-ticket/SKILL.md`, which owns the assessment, planning, owner approval, implementation, review, acceptance testing, and handoff procedure. The main session coordinates; specialists perform only their assigned stage.
 
 Wait for explicit owner approval of the concrete plan before editing application files. Carry approval forward for unchanged scope. Ask about material ambiguities, overlapping owner edits, and material scope or contract changes before dependent work. Preserve unrelated staged, unstaged, and untracked changes.
 
@@ -40,11 +40,11 @@ Strict resume checks are intentional: if the remote base advances beyond ticket 
 
 For tasks involving application code, read `standards/software-design.md` during assessment. For tasks involving PHP backend code, also read `standards/backend-php.md`. Resolve these paths from the orchestrator root. Determine applicability from affected files, manifests, and repository instructions, not only from ticket wording; reassess when affected technologies change. Load each technology-specific standard only for its stated scope. When adding a standard, define its applicability and loading rule here.
 
-Include the absolute paths of applicable standards in assignments to assessors, implementers, and reviewers. Require each specialist to read them before starting its assigned stage. Record the selected standards and material conflicts in the assessment. If a required file cannot be read, report the gap rather than claiming it was applied.
+Include the absolute paths of applicable standards in assignments to assessors, planners, implementers, and reviewers. Require each specialist to read them before starting its assigned stage. Record the selected standards and material conflicts in the assessment. If a required file cannot be read, report the gap rather than claiming it was applied.
 
 Treat shared standards as defaults. Follow explicit target-repository conventions where they differ, and report material conflicts during assessment. Standards do not authorize refactoring outside the approved scope. Black-box expected behavior continues to come from the ticket and approved acceptance criteria.
 
-For affected application behavior, record the ownership and failure map described in `standards/software-design.md` during assessment and use it in implementation handoffs and review. Keep shared standards self-contained and portable: use generic examples, not dependencies on named repositories, private code, or machine-specific source paths. Store concrete project conventions in the target repository and task-specific evidence in run notes.
+For affected application behavior, record the ownership and failure map described in `standards/software-design.md` during planning in `plan.md` and use it in implementation handoffs and review. Keep shared standards self-contained and portable: use generic examples, not dependencies on named repositories, private code, or machine-specific source paths. Store concrete project conventions in the target repository and task-specific evidence in run notes.
 
 ## Development & Testing Conventions
 
@@ -54,7 +54,7 @@ When required local tooling or services are unavailable, diagnose the failure an
 
 ## Agent Roles & Visibility
 
-Define implementation, review, and testing responsibilities in separate role instructions. Roles inherit session permissions; role instructions alone cannot guarantee read-only access or isolation.
+Define assessment, planning, implementation, review, and testing responsibilities in separate role instructions. Roles inherit session permissions; role instructions alone cannot guarantee read-only access or isolation.
 
 ### Model selection and context
 
@@ -84,7 +84,7 @@ the original role's full instructions, required skills, and assignment boundarie
 disclose this substitution. Stop an existing writer before assigning its files to
 a replacement. If the requested model cannot be selected, report the limitation.
 
-Keep Luna out of the six specialist defaults. It may handle bounded support work
+Keep Luna out of the seven specialist defaults. It may handle bounded support work
 such as file discovery, documentation lookup, or execution of a fully specified
 check; it does not replace a required review or independent acceptance stage.
 

@@ -1,6 +1,6 @@
 ---
 name: local-ticket
-description: Coordinate work on a pre-qualified Jira ticket or pasted ticket across existing local repositories, from assessment and owner approval through implementation, independent review, local acceptance testing, and uncommitted handoff. Use for ticket implementation requests in the orchestrator project.
+description: Coordinate work on a pre-qualified Jira ticket or pasted ticket across existing local repositories, from assessment and planning through owner approval, implementation, independent review, local acceptance testing, and uncommitted handoff. Use for ticket implementation requests in the orchestrator project.
 ---
 
 # Orchestrate a ticket
@@ -14,7 +14,7 @@ Do not apply this workflow recursively inside delegated tasks.
 
 Follow the project boundaries, approval policy, and model/context selection rules
 in `AGENTS.md`. Apply those rules to every specialist assignment, including the
-assessor and implementer. Record model selection and usage in `status.md`.
+assessor, planner, and implementer. Record model selection and usage in `status.md`.
 
 Create `runs/<ticket-key>/` and the five records in
 [the run template](references/run-template.md) at intake, even if assessment is
@@ -26,7 +26,7 @@ file fingerprints for the instructions actually applied. Keep status current.
 
 ## Local environment recovery
 
-Apply the root `AGENTS.md` recovery policy throughout assessment, implementation,
+Apply the root `AGENTS.md` recovery policy throughout assessment, planning, implementation,
 review, and acceptance testing. Check required tools and local services before
 dependent work; do not wait until handoff to discover that validation cannot run.
 The coordinator diagnoses reported failures and attempts documented,
@@ -59,7 +59,7 @@ recovery needs to the coordinator rather than changing services themselves.
   in `assessment.md`. Reassess applicability if affected technologies change.
 - Delegate repository assessment to `assessor`, providing ticket details,
   relevant registry paths, verified checkout evidence, and the required outputs
-  below. The assessor owns source investigation; the coordinator owns preflight,
+  below. The assessor owns focused requirements investigation; the coordinator owns preflight,
   effective access checks, questions, proposal, approval, and recording results.
   Inspect decisive evidence or gaps rather than routinely repeating the assessor's
   searches and source reads. This does not replace independent review.
@@ -69,16 +69,44 @@ recovery needs to the coordinator rather than changing services themselves.
   so later review can distinguish ticket changes from the owner's prior work.
   The assessor reports overlaps; the coordinator asks the owner how to proceed
   and waits before dependent edits. Preserve staged state and untracked files.
-- Require the assessor to identify dependencies, API/event/schema contracts,
-  acceptance criteria, local services, test data, and build/test commands. For
-  affected application behavior, return the ownership and failure map from `standards/software-design.md`: rule
-  owner, mutation paths, dependent contracts/representations, and consistency
-  requirements on failure. Keep detail proportionate to the change.
-  The coordinator checks effective session access; configuration on disk does
+- Require clarified scope and acceptance criteria, affected repositories and likely
+  dependencies, confirmed behavior versus assumptions, meaningful product choices,
+  and complexity or uncertainty for planning. Use focused source inspection to
+  ground these conclusions; detailed design, file changes, failure-path tracing,
+  and implementation/test order belong to planning.
+- Ask about material ambiguities and record the owner's answers. Continue
+  independent read-only assessment while waiting. End with **ready for planning**
+  or **waiting for specific answers**. Unanswered requirements that materially
+  change the solution block dependent planning; complexity alone does not.
+- The coordinator checks effective session access; configuration on disk does
   not prove that the current session loaded it.
-- Ask about material ambiguities and continue independent read-only assessment.
 
-## 2. Propose and await approval
+## 2. Plan
+
+When assessment is ready, proceed without a separate assessment approval gate.
+Delegate to `planner` with fresh context under the root AGENTS.md rules. Supply
+the original ticket, clarified scope and acceptance criteria, assessment and owner
+answers, registry paths, baseline, current checkout evidence, and absolute paths
+of applicable engineering standards. Require local branch/HEAD and expected-change
+verification before source inspection. On resume or when adding repositories,
+repeat coordinator preflight first; mismatches return to the coordinator.
+
+The planner reads repository instructions and standards, traces existing behavior
+and contracts, and identifies the closest existing implementation. It owns the
+detailed ownership and failure map from `standards/software-design.md`, proposed
+changes and file ownership by repository, dependency order, compatibility and
+migration needs, and concrete implementation and acceptance validation mapped to
+criteria. It verifies documented tooling, service, and test-data readiness and
+reports recovery needs to the coordinator. Record technical evidence, applicable
+standards updates, decisions, and blocked checks in `plan.md`.
+
+Use assessment evidence without routinely repeating discovery. The coordinator
+checks decisive evidence and gaps, then presents the plan. If planning uncovers a
+material product question, return it to the owner, record the answer in assessment,
+and update dependent planning. Routine technical choices remain the planner's
+responsibility. Neither specialist edits application files or approves implementation.
+
+## 3. Propose and await approval
 
 Present the affected repositories, intended changes, contract decisions,
 implementation order, and validation plan. Identify checks already blocked by
@@ -96,7 +124,7 @@ editing application files or starting implementation agents. A ticket request,
 silence, or a status entry is not approval. Record the owner's actual response
 and approved scope; carry that approval forward without asking again.
 
-## 3. Implement
+## 4. Implement
 
 After approval, repeat the checkout preflight and create the ticket branch from
 the verified base as described in its reference. Reassess if the base changed.
@@ -106,7 +134,7 @@ baseline to the implementer; require local verification before source access.
 
 Delegate to `implementer` after approval. Provide the ticket, acceptance criteria,
 approved scope, repository paths and instructions, existing-change baseline,
-contracts, the assessed ownership and failure map, file ownership, validation
+contracts, the planned ownership and failure map, file ownership, validation
 plan, and the absolute paths of applicable
 engineering standards with any recorded exceptions. Require the implementer to
 read those standards before implementation. Use existing checkouts. Keep
@@ -119,7 +147,7 @@ material scope or contract changes back to the owner for approval; routine
 implementation choices and fixes within scope do not require renewed approval.
 Wait for implementation and relevant checks before review.
 
-## 4. White-box review
+## 5. White-box review
 
 Follow the project-local [review coordinator](../review/SKILL.md) for delegation,
 context selection, assignments, stable snapshots, reconciliation, and re-review.
@@ -127,7 +155,7 @@ Provide the current preflight evidence and the approved ticket assessment/plan.
 Record its per-domain results, fixes, retained evidence, and blockers in `review.md`.
 Route approved fixes to the implementer before acceptance testing.
 
-## 5. Black-box testing
+## 6. Black-box testing
 
 Start `black_box_tester` without inherited conversation history: use
 `fork_turns="none"` where supported. Supply a self-contained assignment with the
@@ -150,7 +178,7 @@ within scope, review relevant fixes, and rerun affected acceptance checks.
 For environment blockers, follow the local environment recovery procedure above;
 if recovery fails, request owner help and keep the affected criteria blocked.
 
-## 6. Handoff
+## 7. Handoff
 
 Wait for all delegated work. Inspect final working-tree state and distinguish
 ticket changes from the baseline. Summarize changes by repository, review
@@ -166,7 +194,10 @@ by default. Compare recorded orchestrator revision/instruction fingerprints with
 the current workflow. Record material workflow changes and any required
 revalidation; do not silently count
 historical stages as satisfying newly introduced requirements. Existing owner
-approval still carries forward for unchanged application scope.
+approval still carries forward for unchanged application scope. Older runs may
+retain technical evidence in assessment; link to that evidence instead of moving
+or recreating it solely for the stage split. Require missing planning inputs for
+the next dependent stage without rerunning completed assessment solely for format.
 Repeat the checkout preflight before inspecting source or editing. Do not switch
 a dirty ticket checkout to the base to refresh it. Compare the run notes with actual
 branch, HEAD, staged/unstaged diffs, relevant untracked files, and running service

@@ -35,7 +35,7 @@ cached ref or failed fetch does not establish freshness. If the ref was rewritte
 and the fetch fails, report it rather than forcing the update. Handle permission
 or network failures through the session's normal approval/error mechanisms.
 
-## New ticket: assessment on the base
+## New ticket: assessment and planning on the base
 
 - Require the selected local base branch to exist. If it is absent, report the
   gap rather than creating a replacement or using another branch.
@@ -52,6 +52,15 @@ or network failures through the session's normal approval/error mechanisms.
   needed; record them in assessment and resolve overlaps before implementation.
 - An existing feature branch is not evidence of an authorized resume. Preserve
   it; do not reuse it for a new ticket even if its name looks related.
+
+## Assessment to planning
+
+Planning stays on the verified base for a new ticket; do not create a ticket
+branch yet. Supply the assessment's preflight evidence and current expected
+changes. The planner verifies branch/HEAD and working-tree state before source
+inspection. A mismatch returns to the coordinator for fresh preflight; resume
+and added repositories also require it. Record changed evidence and invalidate
+affected conclusions before dependent planning.
 
 ## After approval: create the ticket branch
 
@@ -92,7 +101,7 @@ the fetched base before handing off implementation. Do not commit or push.
 - Dirty ticket changes are expected during implementation, review, and testing;
   compare them with the run baseline rather than demanding a clean checkout.
   Recheck after interruptions or signs of external changes. Invalidate affected
-  assessment, review, and test evidence after branch/base/code changes.
+  assessment, planning, review, and test evidence after branch/base/code changes.
 
 Record pass or blocked with evidence and the owner's actual exception/resolution.
 A note saying “checked” is not proof of current checkout state. This is an

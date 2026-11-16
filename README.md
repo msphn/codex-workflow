@@ -15,7 +15,7 @@ Run it -> answer questions -> review -> iterate. Eventually it might successfull
 
 ## How it works
 
-The main agent coordinates assessment, owner approval, implementation, independent
+The main agent coordinates assessment, planning, owner approval, implementation, independent
 review, acceptance testing, and handoff. Specialists handle the assigned stages.
 [Project policy](AGENTS.md) defines boundaries and approval requirements;
 [local-ticket](.agents/skills/local-ticket/SKILL.md) owns the stage procedure.
@@ -54,7 +54,7 @@ Start a new local session with:
 
 ```text
 Verify this project's effective sandbox includes its parent directory, and that
-the local-ticket and review skills and six custom roles are loaded. Do not start a ticket
+the local-ticket and review skills and seven custom roles are loaded. Do not start a ticket
 or change application files. Report any session or managed-policy overrides.
 ```
 
@@ -78,8 +78,11 @@ $local-ticket Work on DEV-1234.
 
 You can also paste the ticket details. Assessment records applicable repository
 guidance, selected engineering standards, checkout state, existing edits,
-contracts, acceptance criteria, and blockers. Approve the concrete proposal to
-start application-code changes. Overlaps with existing work require your decision.
+clarified requirements, acceptance criteria, questions, and complexity. Answer
+material requirement questions; a ready assessment proceeds directly to planning.
+The planner investigates the actual checkouts and proposes implementation,
+contracts, failure handling, and validation. Approve that concrete plan to start
+application-code changes. Overlaps with existing work require your decision.
 
 To continue a ticket:
 
@@ -100,14 +103,16 @@ The starting defaults are:
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
-| Coordinator and planning | `gpt-6-astra` | `medium` |
-| Assessor | `gpt-6-astra` | `medium` |
+| Coordinator | `gpt-6-astra` | `medium` |
+| Assessor | `gpt-6.1-sol` | `medium` |
+| Planner | `gpt-6-astra` | `medium` |
 | Implementer | `gpt-6.1-sol` | `medium` |
 | Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
 | Black-box tester | `gpt-6.1-sol` | `medium` |
 
 The coordinator default lives in `.codex/config.toml`; each specialist declares
-both settings in its role file. Planning remains the coordinator's responsibility.
+both settings in its role file. The planner owns repository investigation and
+technical planning; the coordinator owns questions, presentation, and approval.
 Verify effective settings when starting work: session or managed-policy overrides
 may differ from the files, and editing files does not prove a running agent changed.
 
@@ -135,7 +140,7 @@ dependency on a particular application repository:
   service and DomainService independent of its caller and presentation format.
 
 The coordinator selects applicable standards during assessment and supplies them
-to assessors, implementers, and reviewers. Shared standards are defaults;
+to assessors, planners, implementers, and reviewers. Shared standards are defaults;
 explicit target-repository conventions take precedence. Record concrete project
 exceptions in that repository and task-specific evidence in run notes.
 
@@ -152,7 +157,8 @@ other stacks do not inherit the PHP backend architecture.
 | [standards/backend-php.md](standards/backend-php.md) | PHP backend guidance |
 | [standards/review-method.md](standards/review-method.md) | Common reviewer procedure, evidence, impact severity, and findings format |
 | [.codex/config.toml](.codex/config.toml) | Coordinator model/effort, ticket routing, and parent sandbox settings |
-| [.codex/agents/assessor.toml](.codex/agents/assessor.toml) | Repository assessment and blocking questions |
+| [.codex/agents/assessor.toml](.codex/agents/assessor.toml) | Requirements assessment, repository identification, and blocking questions |
+| [.codex/agents/planner.toml](.codex/agents/planner.toml) | Repository implementation and validation planning |
 | [.codex/agents/implementer.toml](.codex/agents/implementer.toml) | Implementation after approval |
 | [.codex/agents/code_reviewer.toml](.codex/agents/code_reviewer.toml) | Independent correctness and code-quality review |
 | [.codex/agents/architecture_reviewer.toml](.codex/agents/architecture_reviewer.toml) | Independent responsibility, coupling, and cohesion review |
@@ -183,7 +189,7 @@ focused review. Each can run independently and reports only its own coverage.
 Extend domain-specific checks in the corresponding skill; keep common evidence
 and reporting rules in `standards/review-method.md`.
 
-The six roles are assessor, implementer, the three reviewers, and black-box tester.
+The seven roles are assessor, planner, implementer, the three reviewers, and black-box tester.
 Verify their availability in a new session after changing role files. The workflow
 skills define fallback behavior when named roles or delegation are unavailable.
 Keep shared reviewer procedure in `standards/review-method.md`; role files select

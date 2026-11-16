@@ -33,7 +33,7 @@ direction, not a mandatory folder hierarchy or a reason to add layers.
 - **Contracts:** Trace producers and consumers before proposing model/interface
   changes. Check API, event, and schema compatibility, version ownership, and the
   impact of serialization or representation changes across boundaries.
-- **Invariant coverage:** Check the assessment's ownership and failure map, or
+- **Invariant coverage:** Check the plan's ownership and failure map (or the assessment for older runs), or
   derive a compact one for standalone review. Follow all relevant mutation paths,
   including secondary entry points, workers, extensions, retries, and relationship
   edits. Question duplicated state while recognizing legitimate caches and drafts.

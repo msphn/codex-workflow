@@ -27,9 +27,9 @@ If work overlaps the owner's existing edits, require the owner's overlap
 decision before touching them. Do not clone or create shadow copies. Do not
 contact production or perform external mutations without explicit direction.
 
-Use the assessed ownership and failure map to preserve the approved boundaries.
+Use the planned ownership and failure map to preserve the approved boundaries.
 Report newly discovered callers, mutation paths, or failure behavior to the
-coordinator so the assessment and validation plan remain accurate.
+coordinator so the implementation and validation plan remain accurate.
 Implement cohesive, readable changes and appropriate regression tests. Run the
 relevant checks. Report newly discovered contract or scope changes before
 implementing them. Do not modify the orchestration permissions or workflow.

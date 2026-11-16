@@ -1,13 +1,13 @@
 # Software design standards
 
-Technology-neutral defaults for assessment, implementation, and review. Apply
+Technology-neutral defaults for assessment, planning, implementation, and review. Apply
 proportionately to the task and existing architecture. Follow explicit repository
 conventions, report material conflicts, and stay within the approved scope.
 Language, framework, and architectural patterns belong in scoped standards.
 
 ## Ownership and failure map
 
-During assessment, answer these questions for the affected behavior using actual
+During planning, answer these questions for the affected behavior using actual
 callers and state changes. A small change may need only a few sentences.
 
 1. Who owns the rule and the state it protects?

@@ -5,8 +5,8 @@ mark stages that have not run as **not started**. Keep credentials and personal
 test data out of artifacts. Use paths, commands, and concise output excerpts.
 
 Keep each fact in its owning record: assessment for requirements/baseline, plan
-for approved decisions, review for findings, tests for acceptance evidence.
-Other records may link to it's named section or a shared snapshot instead of
+for technical investigation, proposed decisions, and approval, review for findings, tests for acceptance evidence.
+Other records may link to its named section or a shared snapshot instead of
 copying it. A reference must identify the exact evidence/version; it does not
 replace checking current state. Keep `status.md` as the current stage, blockers,
 and next-action index with links to detail. Preserve approval and decision history.
@@ -16,7 +16,7 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 ## status.md
 
 - Ticket and summary
-- Current stage
+- Current stage: assessment, planning, awaiting plan approval, implementation, review, acceptance, or handoff; distinguish blocked from not started
 - Workflow version: orchestrator HEAD and relevant uncommitted instruction fingerprints; update on workflow changes
 - Agent assignments: stage/role, agent identity, requested and exposed effective
   model/effort, fresh/inherited context, substitutions, and escalation reasons
@@ -44,7 +44,17 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 - Baseline: branch, HEAD, staged/unstaged changes, relevant untracked
   files, and content snapshots/fingerprints sufficient to identify later changes
 - Existing-work overlaps and the owner's resolution
-- Dependencies, shared contracts, assumptions, and missing information
+- Clarified scope and criteria, owner questions/options and actual answers
+- Assessment outcome: ready for planning or waiting for specific answers
+- Likely dependencies, confirmed existing behavior versus assumptions, complexity,
+  and uncertainty for planning; distinguish requirement blockers from technical risks
+
+## plan.md
+
+- Planning inputs: exact assessment/criteria version, owner answers, repository
+  instructions, verified checkout/baseline evidence, and applicable standards read
+- Updated standards applicability, exceptions, or conflicts discovered during planning
+- Detailed source evidence, dependencies, shared contracts, and closest existing implementation
 - Ownership and failure map for affected application behavior (see
   `standards/software-design.md`): rule/state owner, mutation paths, dependent
   consumers/representations, and required consistency on failure; scale detail
@@ -53,15 +63,14 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 - Environment readiness and recovery: observed errors, attempted startup/recovery
   commands and results, readiness verification, and any help requested from the owner
 
-## plan.md
-
 - Proposed changes and file ownership by repository
 - Ticket branch per repository, verified starting base commit, pre-implementation
   fetch/check evidence, and any owner decision about carrying existing edits
 - Agreed API/event/schema contracts and dependency order
-- Relevant ownership, transaction, message, and recovery decisions from assessment
+- Relevant ownership, transaction, message, and recovery decisions
 - Implementation and acceptance test plan mapped to criteria
 - Explicit approval record and any later scope decisions
+- Planning outcome: ready for owner approval or blocked, with specific questions/checks
 
 ## review.md
 
