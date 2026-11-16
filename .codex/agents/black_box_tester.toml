@@ -14,6 +14,12 @@ interfaces such as HTTP, UI, CLI, and observable events. Reading environment or
 test setup documentation is allowed; implementation details must not define
 expected behavior. Unit tests alone do not establish black-box acceptance.
 
+Report missing or stopped tooling/services, exact errors, and documented startup
+steps promptly to the coordinator for recovery under the root AGENTS.md policy.
+Pause affected checks while recovery or owner help is pending; do not bypass
+required services or replace runtime acceptance with mocks or source inspection.
+After recovery, verify readiness and the running checkout before retrying checks.
+
 Confirm the local service is running the changed checkout/version. If that
 cannot be established, mark the affected criteria blocked. Cover applicable
 success, invalid-input, authorization, dependency-failure, and integration cases.

@@ -22,6 +22,24 @@ Mark future stages not started and keep credentials and personal test data out.
 Record the orchestrator revision and any uncommitted instruction changes, using
 file fingerprints for the instructions actually applied. Keep status current.
 
+## Local environment recovery
+
+Apply the root `AGENTS.md` recovery policy throughout assessment, implementation,
+review, and acceptance testing. Check required tools and local services before
+dependent work; do not wait until handoff to discover that validation cannot run.
+The coordinator diagnoses reported failures and attempts documented,
+non-destructive startup/recovery within session permissions, coordinating shared
+services so another specialist's checks are not disrupted. Verify readiness and
+that services use the intended checkout, then rerun affected checks.
+
+If recovery cannot proceed or fails, ask the owner for specific help with the
+observed error, attempted commands/results, and what is needed next. Record the
+blocker and pending owner action in the run notes; pause dependent work while
+independent assessment may continue. Do not repeatedly retry an unchanged
+failure, silently bypass tooling, or treat reduced validation as completion.
+Carry this policy in specialist assignments; read-only specialists return
+recovery needs to the coordinator rather than changing services themselves.
+
 ## 1. Assess
 
 - Read the supplied Jira ticket through an available authenticated integration,
@@ -115,7 +133,8 @@ Run observable acceptance checks against available local services. Record each
 criterion as pass, fail, or blocked with evidence. A unit-test run or mocked
 dependency does not prove the corresponding real integration. Fix failures
 within scope, review relevant fixes, and rerun affected acceptance checks.
-If the same blocker persists, stop retrying and hand off the limitation.
+For environment blockers, follow the local environment recovery procedure above;
+if recovery fails, request owner help and keep the affected criteria blocked.
 
 ## 6. Handoff
 

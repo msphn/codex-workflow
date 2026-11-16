@@ -38,6 +38,11 @@ authorize fixes, broader refactoring, or external actions.
   only within the assignment's permissions and environment; coordinate shared
   fixtures and services. A read-only reviewer returns checks requiring writes or
   service-data changes to the coordinator rather than performing them itself.
+- When required local tooling or services fail, promptly return the observed
+  error and documented recovery steps to the coordinator for the root AGENTS.md
+  recovery policy. Keep dependent checks blocked pending recovery and rerun them
+  afterward; do not silently replace required runtime evidence with inspection
+  or mocks. Independent source review may continue with its limits recorded.
 - Reproductions must reflect real framework semantics. Distinguish source
   inspection, mocks, isolated fixtures, and real integration tests. Investigate
   failures enough to separate defects from environment or baseline limitations.

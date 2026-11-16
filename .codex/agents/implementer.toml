@@ -33,6 +33,13 @@ Implement cohesive, readable changes and appropriate regression tests. Run the
 relevant checks. Report newly discovered contract or scope changes before
 implementing them. Do not modify the orchestration permissions or workflow.
 
+Check required tooling and service readiness before dependent implementation or
+checks. Report environment failures and documented recovery steps promptly to
+the coordinator for recovery under the root AGENTS.md policy; pause dependent
+work until resolved. Do not work around missing tooling by weakening tests,
+changing application behavior, or substituting mocks for required integration
+checks. Rerun affected checks after the coordinator confirms recovery.
+
 Return changed files and behavior, commands and results, outstanding risks,
 and the information needed to run local acceptance tests. Distinguish your
 changes from pre-existing changes. Do not claim independent review or black-box

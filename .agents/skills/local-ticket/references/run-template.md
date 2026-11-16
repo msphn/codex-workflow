@@ -36,6 +36,8 @@ test data out of artifacts. Use paths, commands, and concise output excerpts.
   consumers/representations, and required consistency on failure; scale detail
   to the change and identify unresolved design decisions
 - Available local services, test data, commands, and permission limitations
+- Environment readiness and recovery: observed errors, attempted startup/recovery
+  commands and results, readiness verification, and any help requested from the owner
 
 ## plan.md
 
@@ -70,4 +72,5 @@ test data out of artifacts. Use paths, commands, and concise output excerpts.
 - Evidence and fingerprints of relevant code/contracts
 - Data mutations and cleanup, if any
 - Blocked checks and what would unblock them
+- Environment recovery attempts, pending owner help, and checks rerun after recovery
 - Fixes, affected re-runs, and stale results

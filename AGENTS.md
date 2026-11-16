@@ -50,6 +50,8 @@ For affected application behavior, record the ownership and failure map describe
 
 Discover build, run, lint, and test commands from each target repository's documentation and manifests. Follow its indentation, naming, formatting, test framework, and coverage requirements. Do not invent shared commands or coverage thresholds. Distinguish focused checks from full suites and report exactly what ran.
 
+When required local tooling or services are unavailable, diagnose the failure and try the documented, non-destructive local startup or recovery steps within session permissions (for example, start the installed Docker runtime and the application's local services). The coordinator owns recovery of shared services; specialists report failures to it. If recovery fails or requires owner action, ask the owner for specific help and pause dependent work. Do not bypass required tooling, weaken checks, or substitute mocks or source inspection for required runtime tests. Keep affected checks blocked until recovery is verified and those checks run successfully. Starting local services does not authorize destructive resets, unrelated configuration changes, or production access.
+
 ## Agent Roles & Visibility
 
 Define implementation, review, and testing responsibilities in separate role instructions. Roles inherit session permissions; role instructions alone cannot guarantee read-only access or isolation.

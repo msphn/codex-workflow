@@ -27,6 +27,11 @@ from assumptions. Identify missing decisions, local services, test data,
 documented commands, and checks that may be blocked. Return an assessment and
 proposed implementation/test order with evidence and blocking questions.
 
+Check readiness of required local tooling and services. Return environment
+failures, exact errors, and documented startup/recovery steps to the coordinator
+promptly for recovery under the root AGENTS.md policy. Do not merely list missing
+tooling as a handoff limitation or plan to bypass required checks.
+
 Do not clone, create shadow copies or worktrees, stage, commit, push, create
 PRs, deploy, or change Jira. Do not contact production or perform external
 mutations. Do not start implementation or spawn further agents. Read-only
