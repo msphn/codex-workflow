@@ -49,12 +49,14 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
   files, and content snapshots/fingerprints sufficient to identify later changes
 - Existing-work overlaps and the owner's resolution
 - Clarified scope and criteria, owner questions/options and actual answers
+- Guard A decision, concrete evidence, and assessment owner (coordinator or assessor)
 - Assessment outcome: ready for planning or waiting for specific answers
 - Likely dependencies, confirmed existing behavior versus assumptions, complexity,
   and uncertainty for planning; distinguish requirement blockers from technical risks
 
 ## plan.md
 
+- Specialist guards: P, R-A, R-S; required/not required/unresolved, evidence and stage owner; reclassifications with reasons (standards/stage-guards.md)
 - Planning inputs: exact assessment/criteria version, owner answers, repository
   instructions, verified checkout/baseline evidence, and applicable standards read
 - Updated standards applicability, exceptions, or conflicts discovered during planning
@@ -83,8 +85,9 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 ## review.md
 
 - Domain status table: code | architecture | security, each with reviewer,
-  scope, not started/in progress/complete/blocked (or owner-requested omission),
+  scope, not started/in progress/complete/blocked/not required (with guard evidence),
   findings count, exact reviewed file/contract snapshot, checks, and limitations
+- Independent code reviewer's R-A/R-S exemption screening: confirmed/challenged, evidence, newly required assignments and resolutions
 - Ownership and failure map checked against actual callers, mutation paths, and
   side effects; record newly discovered paths or changed assumptions
 - Reviewer context: fresh/inherited, selection mechanism or fallback, supplied inputs

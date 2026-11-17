@@ -25,6 +25,17 @@ prepares existing checkouts and ticket branches. Resume stops for an owner
 decision when the remote base advances beyond ticket
 HEAD, even with uncommitted work.
 
+### Conditional specialists
+
+[Stage guards](standards/stage-guards.md) define when an assessor, planner,
+architecture reviewer, or security reviewer is required. Clear local work using
+an existing pattern can have coordinator-led assessment and planning. Independent
+code review checks architecture/security exemptions against the actual diff;
+unknown applicability cannot justify omission. Plan approval, strict checkout
+checks, delegated implementation, separate acceptance, and model settings remain
+unchanged. Record each decision and evidence before approval and reassess after
+changes. This reduces assignments, not the required stage outputs.
+
 ## Getting started
 
 1. Open this directory as a local Codex project, trust it if prompted, and start
@@ -79,7 +90,7 @@ You can also paste the ticket details. Assessment records applicable repository
 guidance, selected engineering standards, checkout state, existing edits,
 clarified requirements, acceptance criteria, questions, and complexity. Answer
 material requirement questions; a ready assessment proceeds directly to planning.
-The planner investigates the actual checkouts and proposes implementation,
+The coordinator or required planner investigates the actual checkouts and proposes implementation,
 contracts, failure handling, and validation. Approve that concrete plan to start
 application-code changes. Overlaps with existing work require your decision.
 
@@ -99,7 +110,8 @@ any uncommitted instruction changes as well as the application snapshots.
 ### Local commits and checkpoints
 
 The coordinator commits coherent implementation steps after their required
-checks pass, then obtains all three independent reviews and separate acceptance
+checks pass, then obtains independent code review, triggered architecture/security
+reviews, and separate acceptance
 testing. Fixes use follow-up commits and affected re-review/retest. A commit is
 progress evidence, not acceptance. Owner-staged work blocks committing until
 resolved; owner changes are never included without explicit authorization.
@@ -127,9 +139,9 @@ The starting defaults are:
 | Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
 | Black-box tester | `gpt-6.1-sol` | `medium` |
 
-Defaults live in `.codex/config.toml` and specialist role files. The planner
-owns repository investigation and
-technical planning; the coordinator owns questions, presentation, and approval.
+Defaults live in `.codex/config.toml` and specialist role files. The coordinator
+owns questions, presentation, and the approval record. A required planner owns
+technical planning; otherwise the coordinator performs it.
 Verify effective settings when starting work: session or managed-policy overrides
 may differ from the files, and editing files does not prove a running agent changed.
 
@@ -193,7 +205,8 @@ Add roles as `.codex/agents/<name>.toml` with `name`, `description`, and
 `developer_instructions`. This project sets both `model` and
 `model_reasoning_effort` in every specialist role file to avoid implicit inheritance.
 
-Use `$review` for a coordinated review; its skill owns the three-domain protocol.
+Use `$review` for a coordinated review; standalone general reviews cover all three
+domains. Ticket reviews use the explicit specialist guards.
 Initial specialists receive fresh context when supported,
 with explicit assignments and disclosed fallbacks. Review domain and impact
 severity are recorded separately.

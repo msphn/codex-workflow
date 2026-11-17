@@ -49,6 +49,16 @@ Clean Code and SOLID principles as diagnostic tools, not a demand for more class
   failure paths, and regression coverage. Identify tests that mirror calls while
   missing observable behavior, persisted state, or lifecycle guarantees.
 
+## Ticket guard screening
+
+For local-ticket reviews, read [stage guards](../../../standards/stage-guards.md)
+and check the recorded R-A/R-S decisions against the full ticket diff and relevant
+callers, contracts, and input/data paths. Return each exemption as confirmed or
+challenged with evidence. Unknown applicability is challenged, not confirmed.
+Report new triggers to the coordinator for a distinct specialist; do not delegate
+or claim this screening completes architecture/security review. Standalone focused
+code reviews retain their requested scope.
+
 ## Severity within this domain
 
 Use the shared impact scale. A broken core workflow or data-corrupting result can

@@ -26,7 +26,7 @@ Follow `.agents/skills/local-ticket/SKILL.md` for ticket stages and checkpoints.
 
 Wait for explicit owner approval of the concrete plan before editing application files. Carry approval forward for unchanged scope. Ask about material ambiguities, overlapping owner edits, and material scope or contract changes before dependent work. Preserve unrelated staged, unstaged, and untracked changes.
 
-Follow `.agents/skills/review/SKILL.md` for three-domain review, reconciliation, and re-review. Black-box acceptance uses a separate specialist and the ticket's approved criteria. Missing reviews or unavailable acceptance checks remain blocked and must be reported.
+Use `standards/stage-guards.md` to decide whether assessment/planning need specialists and whether architecture/security reviews are required. Assessment and planning remain mandatory; the coordinator owns them when their specialist guards do not trigger. Follow `.agents/skills/review/SKILL.md` for independent code review, triggered domain reviews, reconciliation, and re-review. Black-box acceptance still uses a separate specialist and the ticket's approved criteria. Missing required reviews or unavailable acceptance checks remain blocked and must be reported.
 
 ## Checkout and Branch Policy
 

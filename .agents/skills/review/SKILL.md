@@ -1,6 +1,6 @@
 ---
 name: review
-description: Coordinate a review with separate code, architecture, and security specialists by default, then reconcile evidence-backed findings. Use for a general code/change-set/application review; focused review skills can also be invoked independently.
+description: Coordinate independent code review and required architecture/security specialists, then reconcile evidence-backed findings. Use for a general code/change-set/application review; focused review skills can also be invoked independently.
 ---
 
 # Coordinate a review
@@ -16,10 +16,16 @@ in assignments and require its status header in each result.
 
 ## Default review split
 
-General reviews require all three domains, even for small changes; scale depth
-to the change. A specialist
-may report no applicable issue after inspecting its surface; a skipped or blocked
-review is not a completed review with no findings.
+Standalone general reviews require all three domains; scale depth to the change.
+For local-ticket work, read [stage guards](../../../standards/stage-guards.md): code
+review is mandatory; R-A/R-S determine architecture/security assignments. Supply
+recorded decisions to the code reviewer for independent verification against the
+full ticket diff and affected paths. Unresolved/challenged exemptions require the
+relevant specialist. Owner-requested domains always run.
+
+Record valid exemptions as `not required` with guard evidence, not completed
+reviews. A missing required domain is blocked. Screening does not claim specialist
+coverage. A specialist may report no actionable issue after inspecting its surface.
 
 | Domain | Role | Skill | Primary responsibility |
 | --- | --- | --- | --- |
@@ -41,7 +47,7 @@ The coordinator owns the cross-domain result and all specialist assignments.
    For ticket work, include every commit since the immutable starting base and
    remaining local edits/untracked files, distinguished from owner baseline work.
    The latest commit alone is not a full-ticket review.
-2. Assign each domain a distinct reviewer who did not implement the change.
+2. Assign each required domain a distinct reviewer who did not implement the change.
    Start initial reviews without inherited conversation history, using
    `fork_turns="none"` where supported. If unavailable, disclose inherited context
    in the results rather than claiming context isolation. Run reviewers in
@@ -54,6 +60,7 @@ The coordinator owns the cross-domain result and all specialist assignments.
    Use absolute paths and named sections for shared inputs, require explicit reads,
    and keep the domain task and boundaries in each assignment. Provide raw evidence
    without implementation reasoning or conclusions that favor a particular finding.
+   Include ticket guard decisions and require code-review screening of exemptions.
    Record the context mode and supplied inputs. Re-review may reuse that domain's
    reviewer with its prior findings and the new snapshot.
 4. Keep the reviewed files stable while reviews run. Specialists inspect code and
@@ -79,7 +86,9 @@ is not a substitute; do not start another process to evade session restrictions.
 - A review alone does not authorize fixes. In an approved implementation workflow,
   send scoped findings to the implementer; otherwise present recommendations.
   Bring material scope changes back to the owner.
-- After edits, mark affected review results stale and have the relevant reviewers
+- Reconcile the code reviewer's guard screening before declaring the review complete;
+  assign newly required domains and record evidenced exemptions in the domain table.
+- After edits, reassess ticket guards and mark affected review results stale and have the relevant reviewers
   re-review the new state. Supply the changed snapshot, delta, affected findings,
   and any revised contracts; expand inspection to callers and assumptions affected
   by the delta. Do not routinely restart unchanged domain investigations.

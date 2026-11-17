@@ -41,6 +41,13 @@ failure, silently bypass tooling, or treat reduced validation as completion.
 Include this policy in assignments; read-only specialists report recovery needs
 to the coordinator without changing services.
 
+## Specialist routing
+
+Read [stage guards](../../../standards/stage-guards.md) before assessment. Record
+evidence-based assignments in assessment/plan; unresolved guards are not exemptions.
+Coordinator-led assessment/planning must produce the same stage outputs and obey
+the same standards, preflight, ambiguity, and approval rules.
+
 ## 1. Assess
 
 - Read the supplied Jira ticket through an available authenticated integration,
@@ -52,21 +59,21 @@ to the coordinator without changing services.
   [checkout preflight](references/checkout-preflight.md) for each checkout.
   Record its evidence and any owner decisions in `assessment.md`.
 - Select and read applicable engineering standards using the routing rules in
-  the orchestrator root `AGENTS.md`. Supply their absolute paths to the assessor;
-  have it confirm applicability from the actual repository files and manifests.
+  the orchestrator root `AGENTS.md`. When delegating, supply their absolute paths to the assessor. The assessment
+  owner confirms applicability from actual repository files and manifests.
   Record standards read, repository-specific exceptions, and material conflicts
   in `assessment.md`. Reassess applicability if affected technologies change.
-- Delegate repository assessment to `assessor`, providing ticket details,
+- When guard A requires it, delegate repository assessment to `assessor`, providing ticket details,
   relevant registry paths, verified checkout evidence, and the required outputs
   below. The assessor owns focused requirements investigation; the coordinator owns preflight,
   effective access checks, questions, proposal, approval, and recording results.
   Check decisive evidence and gaps without routinely repeating discovery or replacing
   independent review.
-- The assessor reads applicable parent/nested instructions, inspects `git status
+- The assessment owner (coordinator or assessor) reads applicable parent/nested instructions, inspects `git status
   --short`, staged/unstaged diffs and relevant
   untracked files, and returns the initial branch/HEAD and change baseline
   to distinguish ticket work from owner changes.
-  The assessor reports overlaps; the coordinator asks the owner how to proceed
+  Record overlaps; the coordinator asks the owner how to proceed
   and waits before dependent edits. Preserve staged state and untracked files.
 - Require clarified scope/criteria, affected repositories and dependencies,
   confirmed behavior versus assumptions, product choices, and planning
@@ -82,14 +89,15 @@ to the coordinator without changing services.
 ## 2. Plan
 
 When assessment is ready, proceed without a separate assessment approval gate.
-Delegate to `planner` with fresh context under the root AGENTS.md rules. Supply
+Use guard P: the coordinator plans when no trigger applies; otherwise delegate
+to `planner` with fresh context under the root AGENTS.md rules. For delegation supply
 the original ticket, clarified scope and acceptance criteria, assessment and owner
 answers, registry paths, baseline, current checkout evidence, and absolute paths
 of applicable engineering standards. Require local branch/HEAD and expected-change
 verification before source inspection. On resume or when adding repositories,
 repeat coordinator preflight first; mismatches return to the coordinator.
 
-The planner reads repository instructions and standards, traces existing behavior
+The planning owner reads repository instructions and standards, traces existing behavior
 and contracts, and identifies the closest existing implementation. It owns the
 detailed ownership and failure map from `standards/software-design.md`, proposed
 changes and file ownership by repository, dependency order, compatibility and
@@ -102,13 +110,15 @@ Use assessment evidence without routinely repeating discovery. The coordinator
 checks decisive evidence and gaps, then presents the plan. If planning uncovers a
 material product question, return it to the owner, record the answer in assessment,
 and update dependent planning. Routine technical choices remain the planner's
-responsibility. Neither specialist edits application files or approves implementation.
+responsibility (the coordinator when planning directly). Planning never authorizes
+application edits; only the owner approves implementation.
 
 ## 3. Propose and await approval
 
 Present the affected repositories, intended changes, contract decisions,
 implementation order, and validation plan. Identify checks already blocked by
-missing infrastructure or data.
+missing infrastructure or data. Include the specialist guard decisions and evidence;
+separate coordinator-led stages from domain reviews that are not required.
 
 Identify the closest existing implementation and explain whether the proposal
 follows it. Explicitly distinguish ticket requirements from optional policy
@@ -153,7 +163,9 @@ evidence after each commit. A checkpoint does not satisfy review or acceptance.
 ## 5. White-box review
 
 Follow the project-local [review workflow](../review/SKILL.md).
-Provide the current preflight evidence and the approved ticket assessment/plan.
+Provide the current preflight evidence, approved ticket assessment/plan, and guard
+decisions. Independent code review is always required; its R-A/R-S screening must
+confirm exemptions or trigger distinct domain reviewers before stage completion.
 Record its per-domain results, fixes, retained evidence, and blockers in `review.md`.
 Route approved fixes to the implementer before acceptance testing.
 Commit checked fixes through the same local-commit procedure, then obtain the
