@@ -1,5 +1,7 @@
 # Local ticket orchestrator
 
+![Local ticket orchestrator](slop.png)
+
 A local Codex workflow and engineering knowledge base for coordinating work
 across existing repositories, from assessment to a locally committed owner handoff.
 
