@@ -38,7 +38,7 @@ Strict resume checks are intentional: if the remote base advances beyond ticket 
 
 ## Engineering Standards
 
-For tasks involving application code, read `standards/software-design.md` during assessment. For tasks involving PHP backend code, also read `standards/backend-php.md`. Resolve these paths from the orchestrator root. Determine applicability from affected files, manifests, and repository instructions, not only from ticket wording; reassess when affected technologies change. Load each technology-specific standard only for its stated scope. When adding a standard, define its applicability and loading rule here.
+For tasks involving application code, read `standards/software-design.md` during assessment. For tasks involving PHP backend code, also read `standards/backend-php.md`. For tasks involving Angular components, templates, services, routing, forms, styles, tests, or build configuration, also read `standards/frontend-angular.md`; confirm Angular from the affected package's dependencies and configuration, not its repository name. Mixed-stack tasks load each applicable standard for its own scope. Resolve these paths from the orchestrator root. Determine applicability from affected files, manifests, and repository instructions, not only from ticket wording; reassess when affected technologies change. Load each technology-specific standard only for its stated scope. When adding a standard, define its applicability and loading rule here.
 
 Supply applicable standards by absolute path to assessors, planners, implementers, and reviewers; require reads before their stage. Record the selected standards and material conflicts in the assessment. Report unreadable required standards; do not claim they were applied.
 

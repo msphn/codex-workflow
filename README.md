@@ -167,6 +167,9 @@ dependency on a particular application repository:
   validation, serialization, persistence, messaging, and testing. It explains
   `Action -> WebService -> DomainService`, with WebService as the presentation
   service and DomainService independent of its caller and presentation format.
+- [Angular frontend](standards/frontend-angular.md): version-aware components,
+  state, forms, routing, accessibility, security, and verification, with focused
+  references to the official Angular agent skills.
 
 The coordinator selects applicable standards during assessment and supplies them
 to assessors, planners, implementers, and reviewers. Shared standards are defaults;
@@ -175,6 +178,11 @@ exceptions in that repository and task-specific evidence in run notes.
 
 Keep examples beside their rules. New technology standards need an applicability
 rule in `AGENTS.md`; other stacks do not inherit the PHP architecture.
+Angular follows this same extension path: one scoped standard and a routing
+rule, using the existing specialist handoffs. Angular-only work loads general
+design plus Angular; PHP-only work loads general design plus PHP; a ticket
+touching both loads both scoped standards. No additional specialist role is
+needed, and upstream topic references are consulted only when relevant.
 
 ## Where to customize
 
@@ -183,6 +191,7 @@ rule in `AGENTS.md`; other stacks do not inherit the PHP architecture.
 | [AGENTS.md](AGENTS.md) | Project boundaries, approval/branch policy, communication, and standards routing |
 | [standards/software-design.md](standards/software-design.md) | Shared design and review principles |
 | [standards/backend-php.md](standards/backend-php.md) | PHP backend guidance |
+| [standards/frontend-angular.md](standards/frontend-angular.md) | Angular guidance and official topic references |
 | [standards/review-method.md](standards/review-method.md) | Common reviewer procedure, evidence, impact severity, and findings format |
 | [.codex/config.toml](.codex/config.toml) | Coordinator model/effort, ticket routing, and parent sandbox settings |
 | [.codex/agents/assessor.toml](.codex/agents/assessor.toml) | Requirements assessment, repository identification, and blocking questions |
