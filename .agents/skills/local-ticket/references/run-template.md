@@ -1,13 +1,13 @@
 # Run notes
 
-Create these five files under `runs/<ticket-id>/`. Replace prompts with evidence;
+Create these records under `runs/<ticket-id>/`. Replace prompts with evidence;
 mark stages that have not run as **not started**. Keep credentials and personal
 test data out of artifacts. Use paths, commands, and concise output excerpts.
 
-Keep each fact in its owning record: assessment for requirements/baseline, plan
-for technical investigation, proposed decisions, and approval, review for findings, tests for acceptance evidence.
-Other records may link to its named section or a shared snapshot instead of
-copying it. A reference must identify the exact evidence/version; it does not
+Keep facts in their owning record: assessment for requirements/baseline; plan for
+investigation, decisions, and approval; review for findings; tests for acceptance.
+Link to named sections or shared snapshots instead of copying evidence. A
+reference must identify the exact evidence/version; it does not
 replace checking current state. Keep `status.md` as the current stage, blockers,
 and next-action index with links to detail. Preserve approval and decision history.
 Update changed sections instead of rewriting the whole run after each tool call.
@@ -24,6 +24,10 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
   (including whether parent totals include children), elapsed time, repeated attempts,
   and reasons for rework; mark unavailable data unknown and avoid double-counting totals
 - Approval: pending, or owner's decision and approved scope
+- Specialist outcome headers from standards/specialist-handoff.md, with links
+  to their owning records; completion of a stage is not ticket acceptance
+- Per-repository starting base, current HEAD, checkpoint count, and remaining
+  local changes; link commit/check evidence in plan.md
 - Checkout preflight: pass/blocked per repository, with evidence in assessment
 - Blockers and questions
 - Next action and owner
@@ -66,6 +70,10 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 - Proposed changes and file ownership by repository
 - Ticket branch per repository, verified starting base commit, pre-implementation
   fetch/check evidence, and any owner decision about carrying existing edits
+- Immutable starting base SHA kept separately from later fetched bases and HEADs
+- Checkpoint ledger per repository: before/after SHA, purpose, selected changes,
+  exact checks/results, hook outcomes, authorized inclusion of owner changes,
+  and remaining edits. No cross-repository atomicity implied
 - Agreed API/event/schema contracts and dependency order
 - Relevant ownership, transaction, message, and recovery decisions
 - Implementation and acceptance test plan mapped to criteria
@@ -85,6 +93,10 @@ Store lengthy raw output in artifacts and summarize results, errors, and paths.
 - Duplicate/conflicting findings reconciled with evidence; coordinator decisions
 - Fix handoff and resolution per finding, affected domains, independent re-review
   results, and why any retained earlier domain results remain applicable
+- Fix attempts per finding; after two unresolved attempts, fresh diagnosis or
+  escalation and the changed approach before another attempt
+- Full-ticket commit range and local edits inspected; exact reviewed HEAD and
+  relevant content fingerprints, including any hook-induced changes
 - Current versus stale results, missing/blocked domains, and unresolved findings;
   a skipped or blocked domain is not a completed review with no findings
 

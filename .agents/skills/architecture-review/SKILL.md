@@ -6,9 +6,8 @@ description: Review coupling, cohesion, responsibility and contract ownership, e
 # Architecture review
 
 Read [the shared review method](../../../standards/review-method.md) and apply its
-scope, evidence, permissions, and findings format. This skill runs independently;
-it does not require code or security review to produce its result.
-When delegated, perform only this domain and return to the coordinator.
+scope, evidence, permissions, and findings format. This skill can run independently.
+When delegated, review only this domain and return to the coordinator.
 
 Read the applicable technology standards and existing code before judging the
 structure. Clean architecture is a way to examine responsibilities and dependency

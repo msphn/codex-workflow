@@ -1,7 +1,7 @@
 # Review evidence and reporting
 
-Shared method for the code, architecture, and security review skills. Each skill
-owns its review questions; this file keeps evidence and reporting consistent.
+Shared evidence and reporting method for review skills; each skill owns its
+review questions.
 Read the actual code and verify claims before proposing changes. Review does not
 authorize fixes, broader refactoring, or external actions.
 
@@ -20,6 +20,9 @@ authorize fixes, broader refactoring, or external actions.
   criteria, and baseline. Inspect the full in-scope diff and relevant untracked
   files, then trace affected callers and consumers. Separate introduced issues
   from existing problems that materially affect the work.
+- For ticket work, include every checkpoint since the immutable starting base,
+  plus staged/unstaged edits and untracked files. Never substitute the last commit
+  for the complete ticket diff. Identify owner and upstream changes separately.
 - Record the exact reviewed state: branch/HEAD and content fingerprints or an
   equivalent snapshot of relevant files/contracts. HEAD alone misses local edits.
   Return state mismatches to the coordinator; do not switch shared checkouts.
@@ -34,10 +37,9 @@ authorize fixes, broader refactoring, or external actions.
 
 ## Verification and permissions
 
-- Use available test evidence and inspect its assertions. Run relevant checks
-  only within the assignment's permissions and environment; coordinate shared
-  fixtures and services. A read-only reviewer returns checks requiring writes or
-  service-data changes to the coordinator rather than performing them itself.
+- Use available test evidence and inspect its assertions. Run checks within assigned
+  permissions and environments; coordinate shared fixtures and services. Refer
+  checks requiring writes or service-data changes to the coordinator.
 - When required local tooling or services fail, promptly return the observed
   error and documented recovery steps to the coordinator for the root AGENTS.md
   recovery policy. Keep dependent checks blocked pending recovery and rerun them
@@ -76,8 +78,8 @@ Use impact severity in every review domain:
   problem that should be fixed before shipping; explain why it blocks.
 - **improvement:** An optional change with a concrete benefit; does not block shipping.
 
-Code, architecture, and security reviewers each assign severity to their own
-findings using this scale. `security` identifies a domain, not a severity. For a
+Reviewers assign severity using this scale. `security` identifies a domain, not
+a severity. For a
 security finding, additionally state attacker prerequisites, reachable path,
 impact, and whether it should block shipping. The coordinator preserves domain
 attribution and reconciles severity by practical impact, not by reviewer identity.
@@ -88,8 +90,8 @@ If nothing actionable remains, say so without inventing findings.
 
 ## Review result
 
-Return the review domain, context mode/limitations, scope, reviewed state, findings, counterevidence or
-uncertainty, checks/results, coverage gaps, and any owner decisions needed.
+Return domain, context mode/limits, scope, reviewed state, findings, counterevidence,
+uncertainty, checks/results, coverage gaps, and required owner decisions.
 Distinguish a completed review with no findings from a blocked review. If asked
 for an overall assessment, explain its criteria, strengths, and limitations;
 do not infer authorship or intent from the code. Only the coordinator merges

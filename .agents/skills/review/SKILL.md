@@ -5,17 +5,19 @@ description: Coordinate a review with separate code, architecture, and security 
 
 # Coordinate a review
 
-The main session coordinates; it does not replace the independent reviewers.
+The main session coordinates independent reviewers.
 Read the orchestrator root `AGENTS.md` and apply its model/context selection and
 escalation rules. Record requested/effective model and effort, context mode, and
 any substitution with each domain's results; mark unavailable telemetry unknown.
 Read [the shared review method](../../../standards/review-method.md) for evidence,
 verification, and the merged findings format. Use project-local skills and roles.
+Use [the specialist handoff contract](../../../standards/specialist-handoff.md)
+in assignments and require its status header in each result.
 
 ## Default review split
 
-For a general review, delegate all three domains, including small changes. Scale
-scope and depth to the change rather than silently omitting a domain. A specialist
+General reviews require all three domains, even for small changes; scale depth
+to the change. A specialist
 may report no applicable issue after inspecting its surface; a skipped or blocked
 review is not a completed review with no findings.
 
@@ -25,8 +27,8 @@ review is not a completed review with no findings.
 | Architecture | `architecture_reviewer` | [architecture-review](../architecture-review/SKILL.md) | Coupling, cohesion, ownership, patterns, clean architecture, cross-boundary behavior |
 | Security | `security_reviewer` | [security-review](../security-review/SKILL.md) | Applicable OWASP checks and concrete attack paths |
 
-An explicitly focused request may use just the corresponding skill; label that
-scope and do not claim a full review. If an existing workflow has already assigned
+Focused requests may use one domain skill; label the scope, not a full review.
+If an existing workflow has already assigned
 a domain, run only that domain; never restart coordination or delegate recursively.
 The coordinator owns the cross-domain result and all specialist assignments.
 
@@ -36,7 +38,10 @@ The coordinator owns the cross-domain result and all specialist assignments.
    current content snapshot. Read applicable repository guidance and standards.
    In ticket work, retain the checkout preflight and approved scope; a review
    request does not grant permission to change branches or application code.
-2. Start a distinct reviewer for each domain, none of whom implemented the change.
+   For ticket work, include every commit since the immutable starting base and
+   remaining local edits/untracked files, distinguished from owner baseline work.
+   The latest commit alone is not a full-ticket review.
+2. Assign each domain a distinct reviewer who did not implement the change.
    Start initial reviews without inherited conversation history, using
    `fork_turns="none"` where supported. If unavailable, disclose inherited context
    in the results rather than claiming context isolation. Run reviewers in
@@ -77,10 +82,26 @@ is not a substitute; do not start another process to evade session restrictions.
 - After edits, mark affected review results stale and have the relevant reviewers
   re-review the new state. Supply the changed snapshot, delta, affected findings,
   and any revised contracts; expand inspection to callers and assumptions affected
-  by the delta. Do not restart an unchanged domain's full investigation by default.
+  by the delta. Do not routinely restart unchanged domain investigations.
   Assess impact across all three domains; retain an older result only with an
   explicit reason its reviewed assumptions remain valid.
 - Report the combined findings using the shared format, with per-domain coverage,
   verification limits, and unresolved decisions. The full stage is complete only
   when all required domains have current completed results; unresolved findings
   remain visible even after the review work itself is complete.
+
+## Non-progress checkpoint
+
+Track fix attempts by consolidated finding ID in `review.md`. An attempt is
+a fix followed by independent re-review. After
+two attempts fail to resolve the same finding, require a fresh diagnosis or
+model escalation under AGENTS.md before a third attempt. Record the evidence,
+what changes in the approach, and who owns the next action. Do not restart the
+counter by renaming or rediscovering the same underlying issue.
+
+Keep the original implementer for ordinary follow-ups; stop its writing before
+assigning replacement ownership. Material scope/contract changes return to the
+owner. If no supported new approach is available, report the blocker and ask for
+the specific decision needed. Never discard/downgrade a blocking finding or
+declare completion merely because attempts were exhausted. Evaluate the two-attempt
+threshold against run evidence.

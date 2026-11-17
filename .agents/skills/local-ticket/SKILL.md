@@ -1,6 +1,6 @@
 ---
 name: local-ticket
-description: Coordinate work on a pre-qualified Jira ticket or pasted ticket across existing local repositories, from assessment and planning through owner approval, implementation, independent review, local acceptance testing, and uncommitted handoff. Use for ticket implementation requests in the orchestrator project.
+description: Coordinate pre-qualified Jira or pasted tickets across existing local repositories, with owner-approved plans, local commits, independent review, acceptance testing, and handoff. Use for ticket implementation in the orchestrator project.
 ---
 
 # Orchestrate a ticket
@@ -8,15 +8,15 @@ description: Coordinate work on a pre-qualified Jira ticket or pasted ticket acr
 The main session owns coordination and user communication. Read the root
 `AGENTS.md` and `repositories.local.toml`. If the local registry is missing,
 request setup using `repositories.example.toml`; do not guess checkout paths.
-Paths below are relative to the orchestrator
-root, not a target checkout. Use the installed roles in `.codex/agents/`.
+Paths are relative to the orchestrator root. Use the installed roles in `.codex/agents/`.
 Do not apply this workflow recursively inside delegated tasks.
 
-Follow the project boundaries, approval policy, and model/context selection rules
-in `AGENTS.md`. Apply those rules to every specialist assignment, including the
-assessor, planner, and implementer. Record model selection and usage in `status.md`.
+Apply `AGENTS.md` boundaries, approval, and model/context rules to every assignment.
+Record model selection and usage in `status.md`.
+Use [the specialist handoff contract](../../../standards/specialist-handoff.md)
+for every assignment and result; include its absolute path in specialist inputs.
 
-Create `runs/<ticket-key>/` and the five records in
+Create `runs/<ticket-key>/` and the records in
 [the run template](references/run-template.md) at intake, even if assessment is
 blocked. For a pasted ticket without a key, use a short descriptive directory name.
 The coordinator owns these records; specialists return results for it to record.
@@ -26,9 +26,8 @@ file fingerprints for the instructions actually applied. Keep status current.
 
 ## Local environment recovery
 
-Apply the root `AGENTS.md` recovery policy throughout assessment, planning, implementation,
-review, and acceptance testing. Check required tools and local services before
-dependent work; do not wait until handoff to discover that validation cannot run.
+Apply the `AGENTS.md` recovery policy at every stage. Check required tools and
+services before dependent work.
 The coordinator diagnoses reported failures and attempts documented,
 non-destructive startup/recovery within session permissions, coordinating shared
 services so another specialist's checks are not disrupted. Verify readiness and
@@ -39,8 +38,8 @@ observed error, attempted commands/results, and what is needed next. Record the
 blocker and pending owner action in the run notes; pause dependent work while
 independent assessment may continue. Do not repeatedly retry an unchanged
 failure, silently bypass tooling, or treat reduced validation as completion.
-Carry this policy in specialist assignments; read-only specialists return
-recovery needs to the coordinator rather than changing services themselves.
+Include this policy in assignments; read-only specialists report recovery needs
+to the coordinator without changing services.
 
 ## 1. Assess
 
@@ -61,25 +60,24 @@ recovery needs to the coordinator rather than changing services themselves.
   relevant registry paths, verified checkout evidence, and the required outputs
   below. The assessor owns focused requirements investigation; the coordinator owns preflight,
   effective access checks, questions, proposal, approval, and recording results.
-  Inspect decisive evidence or gaps rather than routinely repeating the assessor's
-  searches and source reads. This does not replace independent review.
-- Require the assessor to read applicable parent and nested repository
-  instructions, inspect `git status --short`, staged/unstaged diffs and relevant
-  untracked files, and return the initial branch/HEAD and existing-change baseline
-  so later review can distinguish ticket changes from the owner's prior work.
+  Check decisive evidence and gaps without routinely repeating discovery or replacing
+  independent review.
+- The assessor reads applicable parent/nested instructions, inspects `git status
+  --short`, staged/unstaged diffs and relevant
+  untracked files, and returns the initial branch/HEAD and change baseline
+  to distinguish ticket work from owner changes.
   The assessor reports overlaps; the coordinator asks the owner how to proceed
   and waits before dependent edits. Preserve staged state and untracked files.
-- Require clarified scope and acceptance criteria, affected repositories and likely
-  dependencies, confirmed behavior versus assumptions, meaningful product choices,
-  and complexity or uncertainty for planning. Use focused source inspection to
+- Require clarified scope/criteria, affected repositories and dependencies,
+  confirmed behavior versus assumptions, product choices, and planning
+  uncertainties. Use focused source inspection to
   ground these conclusions; detailed design, file changes, failure-path tracing,
   and implementation/test order belong to planning.
 - Ask about material ambiguities and record the owner's answers. Continue
   independent read-only assessment while waiting. End with **ready for planning**
   or **waiting for specific answers**. Unanswered requirements that materially
   change the solution block dependent planning; complexity alone does not.
-- The coordinator checks effective session access; configuration on disk does
-  not prove that the current session loaded it.
+- The coordinator verifies effective session access, not just disk configuration.
 
 ## 2. Plan
 
@@ -136,8 +134,8 @@ Delegate to `implementer` after approval. Provide the ticket, acceptance criteri
 approved scope, repository paths and instructions, existing-change baseline,
 contracts, the planned ownership and failure map, file ownership, validation
 plan, and the absolute paths of applicable
-engineering standards with any recorded exceptions. Require the implementer to
-read those standards before implementation. Use existing checkouts. Keep
+engineering standards with any recorded exceptions. The implementer reads
+those standards before editing. Use existing checkouts. Keep
 writers sequential when files or contracts overlap. Only the coordinator may
 create the approved ticket branch through the preflight procedure; specialists
 must not switch shared checkouts. Do not create worktrees.
@@ -146,14 +144,21 @@ Preserve unrelated work, including changes inside files being edited. Bring
 material scope or contract changes back to the owner for approval; routine
 implementation choices and fixes within scope do not require renewed approval.
 Wait for implementation and relevant checks before review.
+After each coherent implementation step and its required checks pass, the
+coordinator follows [local checkpoint commits](references/local-commits.md).
+Read that reference before staging; specialists return changes and evidence,
+never commits. Preserve the immutable starting base and refresh branch/HEAD
+evidence after each commit. A checkpoint does not satisfy review or acceptance.
 
 ## 5. White-box review
 
-Follow the project-local [review coordinator](../review/SKILL.md) for delegation,
-context selection, assignments, stable snapshots, reconciliation, and re-review.
+Follow the project-local [review workflow](../review/SKILL.md).
 Provide the current preflight evidence and the approved ticket assessment/plan.
 Record its per-domain results, fixes, retained evidence, and blockers in `review.md`.
 Route approved fixes to the implementer before acceptance testing.
+Commit checked fixes through the same local-commit procedure, then obtain the
+affected independent re-reviews. Review the full ticket range, not only its last
+commit. Blocking findings prevent acceptance-stage completion and final readiness.
 
 ## 6. Black-box testing
 
@@ -167,14 +172,15 @@ select fresh context, disclose inherited context in `tests.md`; do not claim
 context isolation. On retest, supply the affected criteria and current runtime
 evidence without redefining expected results from the fix.
 Supply current checkout evidence and require local branch/HEAD verification
-before local inspection or testing. Keep expected outcomes independent of
-implementation summaries. Confirm services
-use the current changed checkouts before crediting results.
+before local inspection or testing. Confirm services use the changed checkouts
+before crediting results.
 
 Run observable acceptance checks against available local services. Record each
 criterion as pass, fail, or blocked with evidence. A unit-test run or mocked
 dependency does not prove the corresponding real integration. Fix failures
-within scope, review relevant fixes, and rerun affected acceptance checks.
+within scope, use follow-up commits for checked fixes, obtain affected
+independent review, and
+rerun acceptance checks against the resulting code.
 For environment blockers, follow the local environment recovery procedure above;
 if recovery fails, request owner help and keep the affected criteria blocked.
 
@@ -183,17 +189,22 @@ if recovery fails, request owner help and keep the affected criteria blocked.
 Wait for all delegated work. Inspect final working-tree state and distinguish
 ticket changes from the baseline. Summarize changes by repository, review
 findings and resolutions, exact tests run, per-criterion outcomes, blocked
-checks, and open questions. Leave changes uncommitted for owner iteration.
+checks, and open questions. Include each repository's immutable starting base,
+final HEAD, checkpoint list/purposes, and remaining staged/unstaged/untracked
+changes. Supply the full-ticket diff commands from checkout-preflight, with
+actual SHAs. Leave local commits and remaining changes for owner iteration;
+never push or treat commits as owner acceptance. A blocked required check or
+unresolved blocking finding means blocked handoff, not a completed ticket.
 
 ## Resume and iterate
 
 On feedback or a resumed ticket, start with `status.md`, then read the linked
 scope, approval, evidence, and outstanding decisions needed for the next stage.
-Read earlier history when it affects those decisions; do not reload every artifact
-by default. Compare recorded orchestrator revision/instruction fingerprints with
-the current workflow. Record material workflow changes and any required
-revalidation; do not silently count
-historical stages as satisfying newly introduced requirements. Existing owner
+Read older history only when it affects those decisions. Compare recorded
+orchestrator revision/instruction fingerprints with
+the current workflow. Record material workflow changes and required
+revalidation; historical stages
+do not automatically satisfy new requirements. Existing owner
 approval still carries forward for unchanged application scope. Older runs may
 retain technical evidence in assessment; link to that evidence instead of moving
 or recreating it solely for the stage split. Require missing planning inputs for

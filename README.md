@@ -1,13 +1,13 @@
 # Local ticket orchestrator
 
 A local Codex workflow and engineering knowledge base for coordinating work
-across existing repositories, from assessment to an uncommitted handoff.
+across existing repositories, from assessment to a locally committed owner handoff.
 
 ## Introduction
 
 This is not a "one shot, slop it" harness. It's a helper to make drafting of a local change as good as possible. Currently the primary tech stack is based on symfony and php, but other technologies might be added as I desire.
 
-So who is that for? Software engineers who want to have some structure, observability for their AI work in a best-effort environment. It will not commit, deploy or solve your problems. The entire setup is based on the expectation of the user being in charge and the actual engineer. This is not a vibe-coding setup.
+So who is that for? Software engineers who want to have some structure, observability for their AI work in a best-effort environment. After you approve the plan, the coordinator can make local checkpoint commits on the ticket branch. It will not push or deploy. The entire setup is based on the expectation of the user being in charge and the actual engineer. This is not a vibe-coding setup.
 
 Ideally you have a local folder with your applications, check this repository out next to it and configure the repositories.example.toml.
 
@@ -21,10 +21,9 @@ review, acceptance testing, and handoff. Specialists handle the assigned stages.
 [local-ticket](.agents/skills/local-ticket/SKILL.md) owns the stage procedure.
 
 The [checkout preflight](.agents/skills/local-ticket/references/checkout-preflight.md)
-prepares existing checkouts and ticket branches. Resume intentionally stops for
-an owner decision when the remote base has advanced beyond ticket HEAD, including
-when all ticket work is uncommitted. It does not decide that new commits are safe
-to ignore.
+prepares existing checkouts and ticket branches. Resume stops for an owner
+decision when the remote base advances beyond ticket
+HEAD, even with uncommitted work.
 
 ## Getting started
 
@@ -54,7 +53,7 @@ Start a new local session with:
 
 ```text
 Verify this project's effective sandbox includes its parent directory, and that
-the local-ticket and review skills and seven custom roles are loaded. Do not start a ticket
+the local-ticket and review skills and specialist roles are loaded. Do not start a ticket
 or change application files. Report any session or managed-policy overrides.
 ```
 
@@ -97,6 +96,24 @@ decision. Every ticket has a mandatory `status.md` and supporting run notes unde
 `runs/<ticket-id>/`, ignored by Git. Notes identify the orchestrator revision and
 any uncommitted instruction changes as well as the application snapshots.
 
+### Local commits and checkpoints
+
+The coordinator commits coherent implementation steps after their required
+checks pass, then obtains all three independent reviews and separate acceptance
+testing. Fixes use follow-up commits and affected re-review/retest. A commit is
+progress evidence, not acceptance. Owner-staged work blocks committing until
+resolved; owner changes are never included without explicit authorization.
+See [the commit procedure](.agents/skills/local-ticket/references/local-commits.md).
+
+Each repository keeps its immutable starting base, checkpoint list, exact review
+and test snapshots, and remaining local changes. The handoff includes the whole
+ticket diff, not just the latest commit. No automatic amend, squash, rebase, push,
+PR creation, or deployment. You retain scope decisions and final acceptance.
+
+Specialists use [one result contract](standards/specialist-handoff.md). After two
+unsuccessful fixes of the same review finding, the coordinator requires a fresh
+diagnosis or escalation before another attempt. Blocking findings remain blocking.
+
 ## Models and usage
 
 The starting defaults are:
@@ -110,8 +127,8 @@ The starting defaults are:
 | Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
 | Black-box tester | `gpt-6.1-sol` | `medium` |
 
-The coordinator default lives in `.codex/config.toml`; each specialist declares
-both settings in its role file. The planner owns repository investigation and
+Defaults live in `.codex/config.toml` and specialist role files. The planner
+owns repository investigation and
 technical planning; the coordinator owns questions, presentation, and approval.
 Verify effective settings when starting work: session or managed-policy overrides
 may differ from the files, and editing files does not prove a running agent changed.
@@ -122,10 +139,8 @@ settings take precedence over spawn overrides, so escalation may use a generic
 agent carrying the original role's complete instructions. Luna is reserved for
 bounded support tasks, not a required review or acceptance stage.
 
-Run notes track model selection, available usage, and rework. A cheaper model does
-not necessarily consume fewer tokens. Compare total usage and repeated attempts
-on representative tickets before lowering these defaults further; unavailable
-telemetry stays unknown.
+Run notes track models, usage, and rework. Compare total usage and attempts across
+representative tickets before lowering defaults; mark unavailable telemetry unknown.
 
 ## Engineering knowledge base
 
@@ -144,9 +159,8 @@ to assessors, planners, implementers, and reviewers. Shared standards are defaul
 explicit target-repository conventions take precedence. Record concrete project
 exceptions in that repository and task-specific evidence in run notes.
 
-Keep short examples with the rule they explain. Add a scoped standard and a
-loading rule in `AGENTS.md` for another language or framework when needed;
-other stacks do not inherit the PHP backend architecture.
+Keep examples beside their rules. New technology standards need an applicability
+rule in `AGENTS.md`; other stacks do not inherit the PHP architecture.
 
 ## Where to customize
 
@@ -189,7 +203,7 @@ focused review. Each can run independently and reports only its own coverage.
 Extend domain-specific checks in the corresponding skill; keep common evidence
 and reporting rules in `standards/review-method.md`.
 
-The seven roles are assessor, planner, implementer, the three reviewers, and black-box tester.
+Roles cover assessment, planning, implementation, domain review, and acceptance.
 Verify their availability in a new session after changing role files. The workflow
 skills define fallback behavior when named roles or delegation are unavailable.
 Keep shared reviewer procedure in `standards/review-method.md`; role files select
@@ -198,8 +212,10 @@ into role files or this overview.
 
 ## Boundaries and validation
 
-Work stays in existing checkouts: no clones, shadow copies, or worktrees. Leave
-changes uncommitted; do not push, open PRs, or deploy. Jira reads are allowed for
+Work stays in existing checkouts: no clones, shadow copies, or worktrees. Only
+the coordinator may stage/commit approved application work on the ticket branch.
+Orchestrator setup changes remain uncommitted unless separately authorized.
+Do not push, open PRs, or deploy. Jira reads are allowed for
 intake. Jira changes, production access, and external mutations require explicit
 direction. Shell network access and connector access are separate permissions.
 
@@ -213,6 +229,20 @@ not successful validation.
 Record validation evidence and limitations in the relevant local run notes.
 Verify effective permissions in the session where work will run; configuration
 and past results are not proof.
+
+### Workflow checks
+
+Run the deterministic evidence-helper tests with:
+
+```sh
+python3 -m unittest discover -s tests/workflow -p 'test_*.py' -v
+```
+
+These use disposable local Git fixtures, not application checkouts or providers.
+[Workflow testing](tests/workflow/README.md) documents the read-only snapshot
+helper and separate live agent scenarios. Deterministic tests validate evidence
+mechanics; they do not prove agent compliance. Live evaluations require an
+explicit request and are never started by the helper or test suite.
 
 ## Official references
 

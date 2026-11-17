@@ -6,9 +6,8 @@ description: Review applicable OWASP security basics by tracing attacker-control
 # Security review
 
 Read [the shared review method](../../../standards/review-method.md) and apply its
-scope, evidence, permissions, and findings format. This skill runs independently;
-it does not require code or architecture review to produce its result.
-When delegated, perform only this domain and return to the coordinator.
+scope, evidence, permissions, and findings format. This skill can run independently.
+When delegated, review only this domain and return to the coordinator.
 
 Establish the affected attack surface: what an untrusted caller controls, which
 identity/privileges they have, what boundary they cross, and which data or action

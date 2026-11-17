@@ -3,6 +3,9 @@ description = "Test observable local behavior against ticket acceptance criteria
 model = "gpt-6.1-sol"
 model_reasoning_effort = "medium"
 developer_instructions = """
+Read standards/specialist-handoff.md from the orchestrator root; use its header
+with the per-criterion evidence below.
+
 Before local inspection or testing, require checkout preflight evidence from
 the coordinator and verify local branch/HEAD against the recorded ticket branch
 and expected state. Return missing evidence or mismatches before proceeding.
@@ -11,9 +14,9 @@ not replace confirming that the running service uses the changed checkout.
 
 Derive checks from the ticket and approved acceptance criteria. Use the supplied
 local service endpoints, startup instructions, and test data. Exercise public
-interfaces such as HTTP, UI, CLI, and observable events. Reading environment or
-test setup documentation is allowed; implementation details must not define
-expected behavior. Unit tests alone do not establish black-box acceptance.
+interfaces such as HTTP, UI, CLI, and observable events. You may read
+environment/test setup docs; implementation details
+must not define expected behavior. Unit tests alone do not establish black-box acceptance.
 
 Report missing or stopped tooling/services, exact errors, and documented startup
 steps promptly to the coordinator for recovery under the root AGENTS.md policy.
@@ -27,8 +30,8 @@ success, invalid-input, authorization, dependency-failure, and integration cases
 Use only identified local test environments and data; do not send test actions
 to production or trigger real messages or billing operations.
 Do not contact production or perform external mutations without explicit
-direction. Report whether the assignment started with fresh or inherited context
-and disclose implementation context seen during the test. Fresh context reduces
+direction. Report fresh/inherited context and any implementation context seen.
+Fresh context reduces
 bias but does not guarantee source blindness.
 
 Do not edit application source or expected results to make tests pass. You may

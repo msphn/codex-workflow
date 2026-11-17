@@ -1,10 +1,9 @@
 # Checkout and branch preflight
 
-The coordinator owns this check for every affected application checkout.
-Run it before source inspection, before implementation starts, on resume, and
-when adding a repository. Specialists verify the handed-off state locally;
-they do not switch branches or update the checkout themselves. This procedure
-covers application repositories, not edits to the orchestrator setup itself.
+The coordinator checks application checkouts before source inspection, before
+implementation, on resume, and when adding a repository. Specialists verify the
+handed-off state without switching or updating checkouts. Orchestrator setup
+edits are outside this procedure.
 
 ## Defaults and permitted initial inspection
 
@@ -37,8 +36,8 @@ or network failures through the session's normal approval/error mechanisms.
 
 ## New ticket: assessment and planning on the base
 
-- Require the selected local base branch to exist. If it is absent, report the
-  gap rather than creating a replacement or using another branch.
+- Require the selected local base branch; if absent, report it without creating
+  or substituting another branch.
 - If the checkout is on another branch and is clean, switch to the existing
   base with `git switch develop` (substitute an explicitly selected base).
   Never force a switch or carry dirty work across branches automatically.
@@ -50,8 +49,8 @@ or network failures through the session's normal approval/error mechanisms.
 - Pass only when checked out on the selected base and HEAD equals the fetched
   base commit. Existing local edits may remain only when no switch/update was
   needed; record them in assessment and resolve overlaps before implementation.
-- An existing feature branch is not evidence of an authorized resume. Preserve
-  it; do not reuse it for a new ticket even if its name looks related.
+- An existing feature branch does not authorize a resume or reuse for a new
+  ticket. Preserve it.
 
 ## Assessment to planning
 
@@ -76,8 +75,10 @@ or an explicit branch name before creating the branch; assessment may continue.
 Create it from the verified checked-out base using
 `git switch -c <ticket-branch>`. Never use `-C` or overwrite an existing name; a
 collision requires an owner decision or another unused name. Record branch name,
-base commit, HEAD, and pre-existing changes. Confirm the new branch HEAD equals
-the fetched base before handing off implementation. Do not commit or push.
+immutable starting base commit, HEAD, and pre-existing changes. Confirm the new
+branch HEAD equals the fetched base before handing off implementation. Never
+replace the starting base with a later checkpoint or fetched base. Local commits
+are coordinator-owned and follow [local-commits.md](local-commits.md); never push.
 
 ## Resume and stage handoffs
 
@@ -104,5 +105,31 @@ the fetched base before handing off implementation. Do not commit or push.
   assessment, planning, review, and test evidence after branch/base/code changes.
 
 Record pass or blocked with evidence and the owner's actual exception/resolution.
-A note saying “checked” is not proof of current checkout state. This is an
-instruction-driven check, not an enforced Git hook or filesystem lock.
+Record actual evidence, not “checked”. This procedure is not a Git hook or lock.
+
+## Full-ticket evidence
+
+Keep the immutable starting base separate from the most recently fetched base
+and each handoff HEAD. For each repository, inspect:
+
+```sh
+git log --oneline <starting-base>..HEAD
+git diff --stat <starting-base> HEAD
+git diff <starting-base> HEAD
+git diff --cached
+git diff
+git ls-files --others --exclude-standard
+```
+
+The committed diff alone excludes local edits and untracked files. The complete
+review scope includes them and relevant callers/contracts; distinguish owner
+baseline changes from ticket work. An owner-authorized base update can introduce
+upstream changes into this range: preserve the original base, record the update,
+and identify upstream versus ticket changes explicitly in the review package.
+
+For reproducible scoped content evidence, use the read-only helper documented in
+[tests/workflow/README.md](../../../../tests/workflow/README.md). Capture only
+after preflight permits source inspection; it reads file contents to hash them.
+It does not fetch, prove approval, infer file ownership, or replace preflight.
+Freeze writers while capturing evidence. A changed snapshot requires coordinator
+impact assessment and invalidation of affected review/test results.

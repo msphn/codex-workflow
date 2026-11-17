@@ -6,9 +6,8 @@ description: Review implementation correctness, cognitive complexity, Clean Code
 # Code review
 
 Read [the shared review method](../../../standards/review-method.md) and apply its
-scope, evidence, permissions, and findings format. This skill runs independently;
-it does not require architecture or security review to produce its result.
-When delegated, perform only this domain and return to the coordinator.
+scope, evidence, permissions, and findings format. This skill can run independently.
+When delegated, review only this domain and return to the coordinator.
 
 A human should be able to follow inputs, decisions, side effects, and results.
 Assess readability independently of runtime correctness. Use Robert C. Martin's
