@@ -130,16 +130,38 @@ diagnosis or escalation before another attempt. Blocking findings remain blockin
 
 ## Models and usage
 
-The starting defaults are:
+Defaults researched on 2026-11-18:
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
-| Coordinator | `gpt-6-astra` | `medium` |
-| Assessor | `gpt-6.1-sol` | `medium` |
-| Planner | `gpt-6-astra` | `medium` |
-| Implementer | `gpt-6.1-sol` | `medium` |
-| Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
-| Black-box tester | `gpt-6.1-sol` | `medium` |
+| Coordinator | `gpt-6.2-astra` | `medium` |
+| Assessor | `gpt-6.2-sol` | `medium` |
+| Planner | `gpt-6.2-astra` | `medium` |
+| Implementer | `gpt-6.2-sol` | `medium` |
+| Code, architecture, and security reviewers | `gpt-6.2-sol` | `high` |
+| Black-box tester | `gpt-6.2-sol` | `medium` |
+
+OpenAI's [GPT-6.2 release](https://learn.chatgpt.com/docs/whats-new/gpt-62-astra-sol)
+and [model guidance](https://learn.chatgpt.com/docs/models?surface=cli) recommend
+Astra for demanding work across services and Sol for everyday coding and review.
+We retain Astra for coordination and planning because these roles reconcile
+requirements, contracts, and failures across repositories. Sol handles bounded
+implementation, assessment, review, and acceptance assignments; difficult cases
+escalate to Astra under the project policy.
+
+Both replace their previous-generation counterparts. Published standard API
+short-context input/output prices per million tokens are
+[$8/$40 for Astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra) and
+[$2/$10 for Sol](https://developers.openai.com/api/docs/models/gpt-6.2-sol).
+These are API prices, not measured Codex subscription usage or per-ticket costs.
+Terra's visual/computer-use focus does not justify replacing these engineering
+roles, and Luna remains limited to bounded support work.
+
+Keep the existing medium/high effort split initially: medium for planning and
+execution, high for review. This is a project choice, not a benchmark-proven
+optimum. OpenAI notes that effort levels do not map exactly across generations;
+validate quality, total usage, and rework on representative tickets before tuning.
+No live ticket evaluation was performed for this model update.
 
 Defaults live in `.codex/config.toml` and specialist role files. The coordinator
 owns questions, presentation, and the approval record. A required planner owns

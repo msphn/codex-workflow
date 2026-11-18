@@ -74,7 +74,7 @@ Reuse a specialist for related follow-ups when its model and context remain
 appropriate; send changed inputs and affected scope, retaining required state
 verification and review/test independence.
 
-Escalate the affected assignment to `gpt-6-astra` with `medium` reasoning for
+Escalate the affected assignment to `gpt-6.2-astra` with `medium` reasoning for
 difficult concurrency, authorization, billing, or data-loss reasoning, or unresolved
 review disagreements. Use `high` when the remaining problem needs deeper reasoning.
 The coordinator may make this escalation within the approved scope and must record
