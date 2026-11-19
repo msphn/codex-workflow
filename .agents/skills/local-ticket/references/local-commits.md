@@ -38,7 +38,8 @@ orchestrator setup changes. A commit is a checkpoint, not acceptance.
   can produce a different program from the tested worktree; validate the exact
   staged version or leave the commit blocked. Do not create a shadow checkout
   to work around this project's checkout policy.
-- Describe the change using repository commit-message conventions.
+- Use the ticket key followed by a colon, a space, and a short description
+  as the commit subject, e.g. `DEV-123: foobar`.
   Commit only the inspected index with normal hooks enabled. Never bypass hooks,
   disable signing requirements, or change unrelated Git configuration to proceed.
 - After success or failure, inspect HEAD, index, worktree, and untracked files.
