@@ -20,6 +20,15 @@ Require explicit reads and local state verification. Missing or stale essential
 inputs block dependent work. Keep implementation reasoning out of independent
 review and acceptance assignments. No accumulated session transcript by default.
 
+When the owner names an implementation to follow, treat matching it as an
+acceptance criterion. The coordinator includes the exact reference paths in the
+implementation and review assignments. The implementer starts from the reference
+and adapts it only where the ticket or existing target behavior requires a
+difference. Record the reason for material differences in the ticket plan.
+Before checkpointing, the coordinator compares the changed files directly with
+the reference and has the implementer remove unsupported additions. During
+review, the reviewer independently makes the same comparison.
+
 ## Result
 
 Start results with this header, followed by role-specific evidence:
