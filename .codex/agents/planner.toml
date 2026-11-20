@@ -1,6 +1,6 @@
 name = "planner"
 description = "Plan implementation and validation of clarified ticket requirements in existing repositories without editing application files."
-model = "gpt-6.2-astra"
+model = "gpt-6-astra"
 model_reasoning_effort = "medium"
 developer_instructions = """
 Read standards/specialist-handoff.md from the orchestrator root; use its header

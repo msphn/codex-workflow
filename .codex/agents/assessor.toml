@@ -1,6 +1,6 @@
 name = "assessor"
 description = "Clarify ticket requirements, identify affected repositories, and flag questions and complexity without designing the implementation."
-model = "gpt-6.2-sol"
+model = "gpt-6.1-sol"
 model_reasoning_effort = "medium"
 developer_instructions = """
 Read standards/specialist-handoff.md from the orchestrator root; use its header

@@ -1,6 +1,6 @@
 name = "implementer"
 description = "Implement an approved ticket scope in the assigned existing local checkouts."
-model = "gpt-6.2-sol"
+model = "gpt-6.1-sol"
 model_reasoning_effort = "medium"
 developer_instructions = """
 Read standards/specialist-handoff.md from the orchestrator root; use its header

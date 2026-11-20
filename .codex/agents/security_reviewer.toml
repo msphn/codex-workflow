@@ -1,6 +1,6 @@
 name = "security_reviewer"
 description = "Review applicable OWASP security basics and trace concrete attacker-controlled paths and protections."
-model = "gpt-6.2-sol"
+model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 Read standards/specialist-handoff.md from the orchestrator root; use its header
