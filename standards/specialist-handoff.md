@@ -54,6 +54,26 @@ Completed reviews or test executions may still have blocking findings or
 failures. Missing runtime checks are blocked, never passed. Assessor
 results still distinguish ready for planning from waiting for specific answers.
 
+### Review checklist
+
+For each assigned review domain, place a Markdown results table after the status
+header. Copy the first column of the skill’s **What to check** table verbatim,
+in order, with one row per item. Use the same format for standalone reviews.
+
+| Review point | Result | Evidence or reason |
+| --- | --- | --- |
+| <exact review point> | <one outcome below> | <brief evidence, finding reference, or reason> |
+
+- **Checked** — inspected the applicable scope and found no actionable issue.
+  Name what was examined and the conclusion.
+- **Found problems** — reference the numbered finding or findings for this item.
+- **Skipped** — explain specifically why the item does not apply to this change.
+- **Blocked** — identify the missing evidence or unavailable check and its impact.
+
+When an item has both a finding and a verification gap, use **Found problems**
+and record the gap in the same row. A blocked required check still affects the
+overall status under the shared review method.
+
 The coordinator records results in the existing run records; no extra report
 per agent is required. Link large
 raw artifacts where useful; the header must expose blockers without another read.

@@ -77,6 +77,13 @@ is not a substitute; do not start another process to evade session restrictions.
 
 - Wait for all assigned domains and record each result, reviewer, scope, snapshot,
   findings, verification, and blockers. Partial results remain partial.
+- Compare the review-point column in each specialist’s results table with the
+  assigned skill’s **What to check** table. Require identical names and order,
+  exactly one result per item, and a concrete reason for each skipped or blocked
+  check. Return incomplete tables or unsupported conclusions to the reviewer.
+- Lead the owner-facing review with the requested focus and its actionable
+  findings, including non-blocking improvements. Include each assigned domain’s
+  complete results table and update finding references to the merged IDs.
 - Inspect decisive evidence, deduplicate overlapping findings by underlying issue,
   and retain which domains raised them. Assign merged finding IDs and order by
   impact. Resolve conflicting recommendations against actual contracts and

@@ -5,6 +5,8 @@ description: Review implementation correctness, cognitive complexity, Clean Code
 
 # Code review
 
+## Description
+
 Read [the shared review method](../../../standards/review-method.md) and apply its
 scope, evidence, permissions, and findings format. This skill can run independently.
 When delegated, review only this domain and return to the coordinator.
@@ -13,41 +15,32 @@ A human should be able to follow inputs, decisions, side effects, and results.
 Assess readability independently of runtime correctness. Use Robert C. Martin's
 Clean Code and SOLID principles as diagnostic tools, not a demand for more classes.
 
-## Inspect the implementation
+## Model selection
 
-- **Correctness:** Trace success and failure paths against the requirements.
-  For refactors, compare outputs, side effects, errors, and state transitions.
-  Check validation boundaries, missing/optional values, and unintended changes.
-- **Cognitive complexity:** Identify nesting, tangled conditions, hidden state,
-  temporal dependencies, and helper chains that require unrelated context to
-  understand. Explain the actual reading burden. Metrics may locate hotspots;
-  do not invent a universal function length or complexity threshold.
-- **Clean Code:** Check meaningful names, cohesive functions, clear control flow,
-  visible side effects, and comments that explain reasons. Prefer explicit steps
-  over clever compression when they make the behavior easier to verify.
-- **SOLID:** Check that a component has a coherent responsibility, new behavior
-  does not require scattered edits, replacements honor caller expectations,
-  interfaces expose what consumers need, and dependencies are explicit. Recommend
-  an interface or extraction only for a concrete benefit. Module-wide boundary
-  changes belong to architecture review; report overlaps to the coordinator.
-- **KISS / YAGNI / DRY:** Question speculative features, unnecessary indirection,
-  and unused code after tracing consumers. Consolidate repeated business rules
-  with common ownership; keep simple repetition when an abstraction would hide
-  meaning or couple independently changing behavior.
-  Check whether introduced mechanisms are necessary for the approved behavior
-  and whether an existing implementation already satisfies it. Approval alone
-  does not establish technical necessity. Report avoidable complexity with its
-  concrete maintenance cost and the simpler alternative; do not flag differences
-  solely because they depart from an existing pattern.
-- **State and lifecycle:** Check mutation order, cleanup, retries, concurrency,
-  and partial failure where the flow depends on them. For UI code, trace effect
-  setup/cleanup, timers, pending work, changing inputs, and state ownership using
-  the installed framework's semantics. Do not apply backend patterns to UI code.
-- **Errors:** Preserve causes and useful diagnostics. Check what callers observe
-  and where failures are logged; avoid silent success or unexplained fallback.
-- **Tests:** Read assertions, not just test names. Check meaningful decisions,
-  failure paths, and regression coverage. Identify tests that mirror calls while
-  missing observable behavior, persisted state, or lifecycle guarantees.
+Use the model and reasoning effort configured for [code_reviewer](../../../.codex/agents/code_reviewer.toml). Follow the [coordinator’s model selection and escalation rules](../../../AGENTS.md#model-selection-and-context).
+
+## What to check
+
+| Review point | What to inspect |
+| --- | --- |
+| Correctness | Trace success and failure paths, validation, optional inputs, and caller-visible outputs, side effects, errors, and state transitions. For refactors compare against the baseline. |
+| Cognitive complexity | Trace decisions through conditions, nesting, hidden state, helper chains, and required call order. Identify the specific reading burden. |
+| Clean Code | Check names, function cohesion, control flow, visible side effects, and whether comments explain why. |
+| SOLID | Check responsibility and reasons to change, scattered edits, substitutability, consumer needs, and dependency direction. Tie proposed interfaces or extractions to a concrete benefit. |
+| KISS / YAGNI / DRY | Trace consumers. Check whether existing code already serves the requirement, whether each new mechanism earns its cost, and whether repeated rules have one owner. Preserve independently changing behavior. |
+| State and lifecycle | Trace mutation order, cleanup, retries, concurrency, and partial failure. For UI changes also follow effects, timers, pending work, and changing inputs using the installed framework’s semantics. |
+| Errors | Trace what callers observe, where failures are logged, and whether causes and diagnostics survive. Check fallbacks and silent success. |
+| Tests | Read assertions for meaningful decisions, failures, persisted state, and observable lifecycle behavior. Identify guarantees that interaction mocks leave unverified. |
+
+Inspect every item in **What to check**. Skip an item only when you can explain
+why it does not apply. If evidence needed for an applicable check is unavailable,
+report it as blocked and name the missing evidence.
+
+In every review result, including a specialist handoff, return a Markdown table
+with columns **Review point | Result | Evidence or reason**. Copy every review
+point above verbatim, once, in the same order, including skipped and blocked
+items. Use **Checked**, **Found problems**, **Skipped**, or **Blocked** as
+defined in the [handoff checklist](../../../standards/specialist-handoff.md#review-checklist).
 
 ## Ticket guard screening
 
