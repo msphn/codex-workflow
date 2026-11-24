@@ -170,6 +170,10 @@ dependency on a particular application repository:
 - [Angular frontend](standards/frontend-angular.md): version-aware components,
   state, forms, routing, accessibility, security, and verification, with focused
   references to the official Angular agent skills.
+- [Optimus UI development](.agents/skills/optimus-ui-development/SKILL.md): an
+  additional skill for Angular UIs using `@openng/optimus-ui`, routing to upstream
+  Agent Skill docs, the API manifest, and available MCP lookups. Checks versions
+  and publication gaps before using API details; no global installation required.
 
 The coordinator selects applicable standards during assessment and supplies them
 to assessors, planners, implementers, and reviewers. Shared standards are defaults;

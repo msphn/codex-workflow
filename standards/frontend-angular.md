@@ -18,6 +18,11 @@ They do not select Angular for other stacks or authorize framework migrations.
 - Use the repository's local CLI and package manager for scaffolding where
   appropriate; inspect generated changes. Installing/upgrading dependencies,
   migrating existing patterns, or creating a new app needs approved scope.
+- When the affected UI uses `@openng/optimus-ui`, also apply the
+  [Optimus UI development skill](../.agents/skills/optimus-ui-development/SKILL.md).
+  Include it in specialist handoffs with the resolved library version and relevant
+  upstream references. It covers generated component docs, manifest API lookups,
+  and available MCP tools; a shared `p-*` selector alone is not proof of use.
 
 ## Components, templates, and state
 
