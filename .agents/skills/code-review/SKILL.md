@@ -42,6 +42,28 @@ point above verbatim, once, in the same order, including skipped and blocked
 items. Use **Checked**, **Found problems**, **Skipped**, or **Blocked** as
 defined in the [handoff checklist](../../../standards/specialist-handoff.md#review-checklist).
 
+## Local decision pass
+
+Start with changed local decisions before expanding into broad failure risks.
+For a guard or fallback, trace the value from its construction and
+actual callers: what states do the types permit, and which can reach this branch?
+Check whether every condition justifies the resulting exception, response, or
+default. A combined condition can conceal different failure meanings. Question
+defensive checks when the established contract already guarantees the invariant;
+do not remove protection merely because the happy path makes it look redundant.
+
+For changed input contracts, compare what each caller must supply with what each
+execution path uses. Explain any avoidable reading or change burden even when all
+current calls work. Report concrete small improvements alongside larger defects;
+do not invent a finding for every decision or require extra abstractions.
+
+Include a compact decision-evidence table after the domain checklist for changed
+rejection and fallback paths: **Location | Assumption and provenance | Outcome**.
+Identify the actual constructor, caller, or lifecycle evidence, and whether the
+branch and its outcome fit that evidence. Group equivalent paths; if none changed,
+say so. A checklist label or a general statement that validation was checked does
+not replace this trace. Use the table to support findings, not inflate their count.
+
 ## Ticket guard screening
 
 For local-ticket reviews, read [stage guards](../../../standards/stage-guards.md)

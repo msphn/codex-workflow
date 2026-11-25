@@ -42,6 +42,16 @@ point above verbatim, once, in the same order, including skipped and blocked
 items. Use **Checked**, **Found problems**, **Skipped**, or **Blocked** as
 defined in the [handoff checklist](../../../standards/specialist-handoff.md#review-checklist).
 
+## Contract cohesion
+
+For a changed shared contract, compare its producers with the consumer paths:
+which inputs identify the work, which are used, and which change the operation's
+meaning? Backward-compatible signatures alone do not establish a cohesive
+contract. Check whether callers must know another workflow's incidental inputs
+or conventions. Recommend separation only when it removes concrete coupling or
+makes independent responsibilities clearer; optional fields and branching are
+not defects by themselves.
+
 ## Severity within this domain
 
 Use the shared impact scale. A boundary or consistency failure that can lose data
