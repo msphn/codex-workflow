@@ -52,6 +52,11 @@ or conventions. Recommend separation only when it removes concrete coupling or
 makes independent responsibilities clearer; optional fields and branching are
 not defects by themselves.
 
+When responsibilities are moved, replaced, or consolidated, apply the
+[refactor completeness check](references/refactor-completeness.md). Include its
+before/after map and direct-call evidence in the ownership analysis; naming the
+new layers alone does not establish that the reusable operation is complete.
+
 ## Severity within this domain
 
 Use the shared impact scale. A boundary or consistency failure that can lose data

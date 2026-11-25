@@ -81,6 +81,14 @@ is not a substitute; do not start another process to evade session restrictions.
   assigned skill’s **What to check** table. Require identical names and order,
   exactly one result per item, and a concrete reason for each skipped or blocked
   check. Return incomplete tables or unsupported conclusions to the reviewer.
+- Check that maintenance conclusions use maintenance evidence. Current correctness,
+  passing tests, or absence of a blocker alone do not settle the maintenance impact
+  of a structural dependency or choice identified in a report. Apply this check even
+  when the reviewer has not labeled that dependency a problem. If its reading or
+  change cost remains unanswered, request one bounded
+  follow-up on the concrete task and affected consumers, without prescribing a fix.
+  Accept an evidence-backed no-finding answer; do not reopen resolved questions or
+  turn this check into a finding quota or another full review.
 - Lead the owner-facing review with the requested focus and its actionable
   findings, including non-blocking improvements. Include each assigned domain’s
   complete results table and update finding references to the merged IDs.
