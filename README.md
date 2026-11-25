@@ -138,7 +138,7 @@ The starting defaults are:
 | Assessor | `gpt-6.1-sol` | `medium` |
 | Planner | `gpt-6-astra` | `medium` |
 | Implementer | `gpt-6.1-sol` | `medium` |
-| Code, architecture, and security reviewers | `gpt-6.1-sol` | `high` |
+| Code, architecture, and security reviewers | `gpt-6.1-sol` | `medium` |
 | Black-box tester | `gpt-6.1-sol` | `medium` |
 
 Defaults live in `.codex/config.toml` and specialist role files. The coordinator

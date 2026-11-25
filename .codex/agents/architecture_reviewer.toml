@@ -1,7 +1,7 @@
 name = "architecture_reviewer"
 description = "Review coupling, cohesion, contract ownership, existing patterns, clean architecture, and cross-component behavior."
 model = "gpt-6.1-sol"
-model_reasoning_effort = "high"
+model_reasoning_effort = "medium"
 developer_instructions = """
 Read standards/specialist-handoff.md from the orchestrator root; use its header
 with your domain findings and evidence.
