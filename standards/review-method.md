@@ -26,9 +26,17 @@ authorize fixes, broader refactoring, or external actions.
 - Record the exact reviewed state: branch/HEAD and content fingerprints or an
   equivalent snapshot of relevant files/contracts. HEAD alone misses local edits.
   Return state mismatches to the coordinator; do not switch shared checkouts.
-- Use actual requirements; label assumptions and missing context. Check nearby
-  implementations and counterevidence before treating a pattern as defective.
-  Verify uncertain external contracts against authoritative documentation.
+- Use actual requirements; label assumptions and missing context. Check
+  counterevidence before treating a pattern as defective. Verify uncertain external
+  contracts against authoritative documentation.
+- Compare the changed responsibility with the closest existing flow for the same
+  data or rule, tracing through to its output. Name the rule or representation
+  owner and explain meaningful differences, including duplicated or relocated work.
+  For changed persistent state, also search for other paths that write or replace
+  that state. Trace a representative sequence using both paths and explain which
+  values should be preserved or intentionally replaced. Cite those paths and any
+  evidence gaps in the relevant checklist rows; layer names alone do not establish
+  consistency.
 - For an application-wide review, map main workflows and sample ordinary modules
   as well as hotspots. State coverage and omissions; do not imply exhaustive review.
 - Explain concrete correctness, security, reading, or change consequences.

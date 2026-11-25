@@ -24,6 +24,7 @@ Use the model and reasoning effort configured for [code_reviewer](../../../.code
 | Review point | What to inspect |
 | --- | --- |
 | Correctness | Trace success and failure paths, validation, optional inputs, and caller-visible outputs, side effects, errors, and state transitions. For refactors compare against the baseline. |
+| Resource use | For collection reads and transformations, compare input cardinality, transferred or materialized data, repeated work, and output cardinality. Identify actual bounds and whether growth is justified by the result; distinguish structural growth from measured operational impact. |
 | Cognitive complexity | Trace decisions through conditions, nesting, hidden state, helper chains, and required call order. Identify the specific reading burden. |
 | Clean Code | Check names, function cohesion, control flow, visible side effects, and whether comments explain why. |
 | SOLID | Check responsibility and reasons to change, scattered edits, substitutability, consumer needs, and dependency direction. Tie proposed interfaces or extractions to a concrete benefit. |
