@@ -21,13 +21,18 @@ inputs block dependent work. Keep implementation reasoning out of independent
 review and acceptance assignments. No accumulated session transcript by default.
 
 When the owner names an implementation to follow, treat matching it as an
-acceptance criterion. The coordinator includes the exact reference paths in the
-implementation and review assignments. The implementer starts from the reference
-and adapts it only where the ticket or existing target behavior requires a
-difference. Record the reason for material differences in the ticket plan.
+acceptance criterion. Include the reference commit, exact paths, and approved
+material differences in the implementation and review assignments, including
+follow-ups. Start from the reference and adapt it where the ticket or existing
+target behavior requires a difference. Report newly discovered material
+differences to the coordinator for the owner's decision before implementing them.
+
 Before checkpointing, the coordinator compares the changed files directly with
-the reference and has the implementer remove unsupported additions. During
-review, the reviewer independently makes the same comparison.
+the pinned reference and resolves differences outside the approved scope.
+During review, the reviewer independently compares the resulting behavior with
+the reference, including what happens during apply or deployment when relevant.
+Record the paths compared, any remaining differences, and which behaviors
+could only be checked in source.
 
 ## Result
 

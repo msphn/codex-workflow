@@ -26,6 +26,8 @@ Follow `.agents/skills/local-ticket/SKILL.md` for ticket stages and checkpoints.
 
 Wait for explicit owner approval of the concrete plan before editing application files. Carry approval forward for unchanged scope. Ask about material ambiguities, overlapping owner edits, and material scope or contract changes before dependent work. Preserve unrelated staged, unstaged, and untracked changes.
 
+When the owner names an implementation to follow, treat its relevant behavior as an acceptance criterion. Record the reference commit and exact file paths in the plan. List each proposed material difference, why the target needs it, and whether the owner approved it. Bring newly discovered material differences to the owner before implementing them. Carry the reference and approved differences into follow-up work, including direct coordinator work. Show the result of the comparison and any remaining verification gaps in the handoff.
+
 Use `standards/stage-guards.md` to decide whether assessment/planning need specialists and whether architecture/security reviews are required. Assessment and planning remain mandatory; the coordinator owns them when their specialist guards do not trigger. Follow `.agents/skills/review/SKILL.md` for independent code review, triggered domain reviews, reconciliation, and re-review. Black-box acceptance still uses a separate specialist and the ticket's approved criteria. Missing required reviews or unavailable acceptance checks remain blocked and must be reported.
 
 ## Checkout and Branch Policy
@@ -94,3 +96,5 @@ do not estimate savings from model names. Compare total ticket usage and repeate
 attempts across representative tickets before reducing these defaults further.
 
 Use Codex's agent activity view. Every ticket must have `runs/<ticket-id>/status.md` and the supporting records defined by the local-ticket run template, including blocked tickets. Keep status current at stage changes and handoff. These records are mandatory but do not enforce authorization, isolation, or a durable state machine.
+
+When assisting a live rollout, keep a checkpoint at the top of the ticket's `status.md`. Record the environment and current runbook step, the last confirmed action and its evidence, and the single next action with its actor and any prerequisite. Update it when an operation starts, completes, fails, or changes the next action. Distinguish owner-reported results from direct observations. On resume, verify any uncertain state that the next action depends on before giving rollout instructions.
